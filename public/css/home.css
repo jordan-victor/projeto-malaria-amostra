@@ -1,0 +1,20 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+#home{
+    background-image: url('/img/fundo.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;    
+}
+
+#home .imgHome{
+    width: 350px;
+}
+#home .imgHome img{
+    width: 100%;
+    margin-bottom: -2px;
+}

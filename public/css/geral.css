@@ -1,0 +1,42 @@
+body{
+    
+}
+body h1{
+    font-family: "Bebas Neue",Arial, Helvetica, sans-serif;
+    font-size: 60px;
+    text-align: center;
+    font-family: "Bebas Neue", sans-serif;
+    color: white;
+    font-size: 70px;
+    font-weight: bold;
+    background: linear-gradient(to right, rgb(0, 227, 136), rgb(143, 255, 210), rgb(216, 255, 239) );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+body header{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+
+
+/*NAVBAR*/
+.navbar{
+    margin-bottom: 30px;
+}
+.navbar ul{
+    display: flex;
+    gap: 10px;
+}
+.navbar ul li a{
+    text-decoration: none;
+    color: rgb(176, 255, 223);
+}
+.navbar ul li a:hover{
+    color: white;
+}
