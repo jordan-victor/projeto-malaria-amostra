@@ -3,18 +3,48 @@
     padding: 0;
     box-sizing: border-box;
 }
-#home{
-    background-image: url('/img/fundo.png');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    overflow: hidden;    
-}
 
+/*CARDS DA HOME*/
+/*CARD COM A IMAGEM, E OS CARD "MALARIÔMETRO" E "LOCALIDADES"*/
+#home .carta{
+    padding: 20px;
+    border-radius: 30px;
+}
+#home .carta:hover{
+    cursor: pointer;
+    transform: scale(1.02);
+    transition: all 0.3s ease;
+    background-color: #18624f;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.228);
+}
 #home .imgHome{
     width: 350px;
 }
 #home .imgHome img{
     width: 100%;
     margin-bottom: -2px;
+}
+#home section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#home .container .cards1{
+    justify-content: space-between;
+    width: 100%;
+}
+
+#home .container .cards2{
+    justify-content: space-between;
+    width: 65%;
+}
+
+#home section img{
+    width: 200px;
+}
+
+@media(max-width:991px){
+    .cards1,.cards2,.cards3{
+        flex-direction: column;
+    }
 }
