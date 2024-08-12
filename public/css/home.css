@@ -30,6 +30,7 @@
     align-items: center;
 }
 #home .container .cards1{
+    position: relative;
     justify-content: space-between;
     width: 100%;
 }
@@ -40,11 +41,17 @@
 }
 
 #home section img{
-    width: 200px;
+    width: 150px;
 }
 
 @media(max-width:991px){
+    #home .cards1,.cards2,.cards3{
+        width: 100%!important;
+        justify-content: center;
+    }
+    /*
     .cards1,.cards2,.cards3{
         flex-direction: column;
     }
+    */
 }

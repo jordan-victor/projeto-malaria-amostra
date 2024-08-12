@@ -6,12 +6,15 @@
     <header class="container">
         <h1 style="line-height:70px">MONITORAMENTO DIGITAL</h1>
         <section class="cards1">
-            <div class="carta">
-                <img src="/img/home/localidades.png" alt="Malariômetro Localidades">
-            </div>
+            <a href="{{route('localidades')}}">
+                <div class="carta">
+                    <img src="/img/home/localidades.png" alt="Malariômetro Localidades">
+                </div>
+            </a>
 
-            <div class="imgHome">
-                <img src="/img/home/familia.png" alt="Ilustração de uma família">
+            <div class="imgHome logo">
+                <!--<img src="/img/home/familia.png" alt="Ilustração de uma família">-->
+                <img src="/img/logo.png" alt="Logo">
             </div>
 
             <div class="carta">
@@ -23,7 +26,7 @@
 
         <section class="cards2">
             <div class="carta">
-                <img src="/img/home/alerta.png" alt="Alerta Malária" style="width:250px">
+                <img src="/img/home/alerta.png" alt="Alerta Malária" style="width: 160px;">
             </div>
 
             <div class="carta">

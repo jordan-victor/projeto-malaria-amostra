@@ -70,6 +70,49 @@ body header{
 
 
 
+
+
+
+
+
+
+/*TAMANHO DAS FONTES DE TODAS AS PÁGINAS*/
+body h1{
+    font-size: 60px;
+}
+
+
+
+
+
+
+
+
+
+
+/*ESTILO GERAL DE TODOS OS DASHBOARDS*/
+.dashContainer .card{
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.349);
+}
+.dashContainer .filtros{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+.dashContainer .filtros p{
+    line-height: 5px;
+}
+
+
+
+
+
+
+
+
+
+
 /*FOOTER*/
 footer{
     display: flex;
