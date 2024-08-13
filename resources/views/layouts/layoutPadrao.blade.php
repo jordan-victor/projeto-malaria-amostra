@@ -17,11 +17,12 @@
     <!--ESTILOS-->
     <link rel="stylesheet" href="/css/geral.css">
     <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="/css/localidade.css">
 </head>
 
 <body id="body">
     <!--TODO O CONTEÚDO DAS OUTRAS PÁGINAS SERÃO IMPORTADOS PARA DENTRO DESSE CONTAINER-->
-    <div class="container">
+    <div class="conteudo" style="width:95%">
        <header>
             @include('layouts.navbar')
        </header>

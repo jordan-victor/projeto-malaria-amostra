@@ -9,6 +9,7 @@ html, body {
 body{
     display: flex;
     flex-direction: column;
+    align-items: center;
     justify-content: space-between!important;
     gap: 50px;
     background-image: url('/img/fundo.png');
@@ -91,9 +92,6 @@ body h1{
 
 
 /*ESTILO GERAL DE TODOS OS DASHBOARDS*/
-.dashContainer .card{
-    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.349);
-}
 .dashContainer .filtros{
     display: flex;
     flex-direction: row;
@@ -104,7 +102,36 @@ body h1{
     line-height: 5px;
 }
 
+.dashContainer .card{
+    display:flex;
+    flex-direction:row;
+    gap: 10px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.349);
+}
 
+
+.dashContainer .card img{
+    width: 50px;
+}
+.dashContainer .card .subCard{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.dashContainer .card h4{
+    color: #2a9e7f;
+    text-align: center;
+    line-height: 20px;
+}
+.dashContainer .card .subCard p{
+    text-align: center;
+    color: rgb(71, 71, 71);
+}
+.dashContainer .card .subCard span{
+    font-size: 10px;
+}
 
 
 
@@ -119,6 +146,7 @@ footer{
     justify-content: center;
     background-image: linear-gradient(to right, #18624f, #1b6f59);
     padding: 20px;
+    width: 100%;
 }
 footer .container{
     display: flex;

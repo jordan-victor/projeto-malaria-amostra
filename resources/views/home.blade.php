@@ -8,7 +8,7 @@
         <section class="cards1">
             <a href="{{route('localidades')}}">
                 <div class="carta">
-                    <img src="/img/home/localidades.png" alt="Malariômetro Localidades">
+                    <img src="/img/home/localidades.png" alt="Malariômetro Localidades" width="150">
                 </div>
             </a>
 
@@ -18,7 +18,7 @@
             </div>
 
             <div class="carta">
-                <img src="/img/home/notificantes.png" alt="Unidades Notificantes">
+                <img src="/img/home/notificantes.png" alt="Unidades Notificantes" width="150">
             </div>
         </section>
 
@@ -30,7 +30,7 @@
             </div>
 
             <div class="carta">
-                <img src="/img/home/indicadores.png" alt="Malariômetro Localidades">
+                <img src="/img/home/indicadores.png" alt="Malariômetro Localidades" width="150">
             </div>
         </section>
 
@@ -38,7 +38,7 @@
 
         <section class="cards3">
             <div class="carta">
-                <img src="/img/home/criadouros.png" alt="Criadouros">
+                <img src="/img/home/criadouros.png" alt="Criadouros" width="150">
             </div>
         </section>
     </header>

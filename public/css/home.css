@@ -40,10 +40,6 @@
     width: 65%;
 }
 
-#home section img{
-    width: 150px;
-}
-
 @media(max-width:991px){
     #home .cards1,.cards2,.cards3{
         width: 100%!important;
