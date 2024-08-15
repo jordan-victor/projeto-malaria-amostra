@@ -22,7 +22,7 @@
 
 <body id="body">
     <!--TODO O CONTEÚDO DAS OUTRAS PÁGINAS SERÃO IMPORTADOS PARA DENTRO DESSE CONTAINER-->
-    <div class="conteudo" style="width:95%">
+    <div class="corpo">
        <header>
             @include('layouts.navbar')
        </header>
@@ -55,7 +55,14 @@
    </footer>  
 
 </body>
+<!--biblioteca charts.js-->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-chart-geo"></script>
 
+<!--scripts js das páginas-->
+<script src="/js/localidade.js"></script>
+
+<!--bootstrap-->
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>

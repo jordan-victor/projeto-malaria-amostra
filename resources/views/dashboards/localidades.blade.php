@@ -10,6 +10,11 @@
 <!----------1. SEÇÃO DE FILTROS------------>
 <main class="dashContainer">
   <section class="filtros card p-2 mb-3 row">
+    <div class="col-1 d-flex-row" id="limpar">
+      <i class="fa-solid fa-filter"></i>
+      <p>Limpar</p>
+    </div>
+
     <!-- filtro por Disas -->
     <div class="col">
       <h4>Distrito</h4>
@@ -57,12 +62,12 @@
 
 
   <!------------2. SEÇÃO DOS INDICADORES E TOTAIS------------>
-  <section class="card bg-transparent shadow-none border-0 row">
+  <section class="card shadow-none border-0 row d-flex flex-row gap-2 mb-3 bg-transparent">
     <!-- Seção Total de Notificações -->
     <div class="card subCard p-2 col-2">
       <h4>Notificações</h4>
 
-      <div class="d-flex flex-center gap-3">
+      <div class="d-flex flex-center">
         <div><img src="/img/imgs_localidade/Notificando.png" alt="icone das notificações"></div>
         <h4>70000</h4>
       </div>
@@ -73,14 +78,14 @@
 
     <!-- Seção total de positivos -->
     <div class="card subCard p-2 col-3">
-      <div class="d-flex flex-center gap-3">
+      <div class="d-flex flex-center">
         <div><img src="/img/imgs_localidade/positivo.png" alt="icone dos positivos"></div>
         <div>
           <h4>Positivos</h4>
           <h4>9999</h4>
         </div>
       </div>
-     
+    
       <div class="d-flex flex-center gap-5">
         <p>Falciparum <br><span>LVC:</span> 999</p>
         <p>F+V <br><span>LVC:</span> 999</p>
@@ -91,7 +96,7 @@
 
     <!-- Seção autóctones e importados -->
     <div class="card p-2 subCard col-2">
-      <div class="d-flex flex-center gap-3">
+      <div class="d-flex flex-center gap-1">
         <div><img src="/img/imgs_localidade/autoctones.png" alt="icone dos autóctones"></div>
         <div>
           <h4>Autóctones</h4>
@@ -99,7 +104,7 @@
         </div>
       </div>
       
-      <div class="d-flex flex-center gap-3">
+      <div class="d-flex flex-center gap-1">
         <div><img src="/img/imgs_localidade/importados.png" alt="icone dos importados"></div>
         <div>
           <h4>Importados</h4>
@@ -113,18 +118,18 @@
     <div class="card p-2 subCard d-flex justify-content-start col" id="prioritarios">
       <h4>Grupos Prioritários</h4>
 
-      <div class="d-flex gap-5">
-        <div class="d-flex flex-center gap-3">
+      <div class="d-flex w-100 justify-content-center justify-content-between" id="teste">
+        <div class="d-flex flex-center">
           <div><img src="/img/imgs_localidade/gestante.png" alt="icone gestante"></div>
           <p>Gestantes <br> <span>LVC:</span></p>
         </div>
         
-        <div class="d-flex flex-center gap-3">
+        <div class="d-flex flex-center gap-1">
           <div><img src="/img/imgs_localidade/idosos.png" alt="icone idoso"></div>
           <p>Idosos <br> <span>LVC:</span></p>
         </div>
         
-        <div class="d-flex flex-center gap-3">
+        <div class="d-flex flex-center gap-1">
           <div><img src="/img/imgs_localidade/criancas.png" alt="icone criança"></div>
           <p>Crianças <br> <span>LVC:</span></p>
         </div>
@@ -142,13 +147,28 @@
 
 
   <!------------3. SEÇÃO DOS GRÁFICOS E TABELAS------------>
-  <!-- Seção Gráfico da positividade -->
-  <p>Positividade por Semana Epidemiológica</p>
+  <section class="card row mb-3">
+    <div class="positivosContainer w-100">
+      <canvas id="positivos" height="100"></canvas>
+    </div>
+  </section>
 
-  <!-- Seção Locais prováveis de infecção -->
-  <p>Locais Prováveis de Infecção</p>
-  <!-- Seção Unidades Notificantes -->
-  <p>Unidades Notificantes</p>
+
+  <section class="row d-flex flex-row gap-2">
+    <!-- Seção Locais prováveis de infecção -->
+    <div class="card col p-2">
+      <h4>Locais Prováveis de infecção</h4>
+      <canvas id="localidades"></canvas>
+    </div>
+
+    <!-- Seção Unidades Notificantes -->
+    <div class="card col p-2">
+      <h4>Unidades Notificantes</h4>
+      <canvas></canvas>
+      <!-- Seção Gráfico da positividade -->
+      <!--<canvas></canvas>-->
+    </div>
+  </section>
 </main>
 
 

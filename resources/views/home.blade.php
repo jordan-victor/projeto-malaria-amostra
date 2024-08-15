@@ -14,7 +14,7 @@
 
             <div class="imgHome logo">
                 <!--<img src="/img/home/familia.png" alt="Ilustração de uma família">-->
-                <img src="/img/logo.png" alt="Logo">
+                <img src="/img/home/animacao.gif" alt="Logo">
             </div>
 
             <div class="carta">

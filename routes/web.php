@@ -1,6 +1,6 @@
 <?php
-
 use Illuminate\Support\Facades\Route;
+
 //Rotas da Home
 Route::get('/', function () {
     date_default_timezone_set('America/Manaus');
@@ -13,10 +13,11 @@ Route::get('/', function () {
 
 
 
+
 // Rota para abrir a página do dashboard
-Route::get('/dashboard', function () {
+Route::get('/localidades', function(){
     date_default_timezone_set('America/Manaus');
     $data = date('Y');
 
-    return view('dashboard', ['data'=>$data]);
+    return view('dashboards.localidades', ['data'=>$data]);
 })->name('localidades');

@@ -1,3 +1,63 @@
-.dashContainer .filtros h4{
+/*FILTRO*/
+.dashContainer .filtros div h4{
     text-align: left;
+}
+.dashContainer i{
+    color: #2a9e7f;
+    font-size: 30px;   
+}
+.dashContainer #limpar{
+    cursor: pointer;
+}
+.dashContainer #limpar p{
+    color:#2a9e7f;
+}
+.dashContainer .filtros{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+.dashContainer .filtros p{
+    line-height: 5px;
+}
+
+
+
+
+
+/*ESTILO DOS DASHBOARDS*/
+.dashContainer .card{
+    display:flex;
+    flex-direction:row;
+    gap: 10px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.349);
+    /*background-color: #e1fff8;*/
+    background-image: radial-gradient(circle,#ffffff, #e5fff9);
+    border: none;
+}
+.dashContainer section{
+    background-color: transparent!important;
+}
+.dashContainer .card img{
+    width: 50px;
+}
+.dashContainer .card .subCard{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.dashContainer .card h4{
+    color: #2a9e7f;
+    text-align: center;
+    line-height: 20px;
+}
+.dashContainer .card .subCard p{
+    text-align: center;
+    color: rgb(71, 71, 71);
+}
+.dashContainer .card .subCard span{
+    font-size: 10px;
 }
