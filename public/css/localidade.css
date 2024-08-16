@@ -61,3 +61,42 @@
 .dashContainer .card .subCard span{
     font-size: 10px;
 }
+
+
+
+
+
+
+/*header da tabela Locais prováveis de infecção*/
+#locInfec{
+    display: flex;
+    flex-direction: column;
+}
+
+#infecHeader{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+#infecHeader p{
+    font-size: 12px;
+}
+#infecHeader i{
+    font-size: 12px;
+}
+#infecHeader button{
+    height: 25px;
+    font-size: 12px;
+    padding-left: 4px;
+    padding-right: 4px;
+    border: none;
+    background-color: #2a9e7f;
+    cursor: pointer;
+    color: white;
+    border-radius: 15px;
+}
+
+#locInfec table{
+    font-size: 12px;
+}

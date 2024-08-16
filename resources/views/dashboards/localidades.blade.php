@@ -156,13 +156,100 @@
 
   <section class="row d-flex flex-row gap-2">
     <!-- Seção Locais prováveis de infecção -->
-    <div class="card col p-2">
-      <h4>Locais Prováveis de infecção</h4>
-      <canvas id="localidades"></canvas>
+    <div class="card col p-2" id="locInfec">
+      <div id="infecHeader">
+        <h4>Locais Prováveis de infecção</h4>
+        <p><i class="fa-solid fa-square text-danger"></i> Autóctones</p>
+        <button>Exibir local em mapa</button>
+      </div>
+      
+      <div id="infectBody" class="row">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Cod+MunIBGE</th>
+              <th>Nome local</th>
+              <th>Positivo</th>
+              <th>Idoso</th>
+              <th>Criança</th>
+              <th>Gestante</th>
+              <th>Falcip.</th>
+            </tr>
+          </thead>
+
+          <div id="bodyTab"></div>
+          <tbody style="max-width:200px; overflow-y:scroll">
+            <tr>
+              <td>hefuhfuh</td>
+              <td>efeefeffefe</td>
+              <td>feffeef</td>
+              <td>feeffef</td>
+              <td>fefeeef</td>
+              <td>effeefeef</td>
+              <td>fefeeef</td>
+            </tr>
+            <tr>
+              <td>hefuhfuh</td>
+              <td>efeefeffefe</td>
+              <td>feffeef</td>
+              <td>feeffef</td>
+              <td>fefeeef</td>
+              <td>effeefeef</td>
+              <td>fefeeef</td>
+            </tr>
+            <tr>
+              <td>hefuhfuh</td>
+              <td>efeefeffefe</td>
+              <td>feffeef</td>
+              <td>feeffef</td>
+              <td>fefeeef</td>
+              <td>effeefeef</td>
+              <td>fefeeef</td>
+            </tr>
+            <tr>
+              <td>hefuhfuh</td>
+              <td>efeefeffefe</td>
+              <td>feffeef</td>
+              <td>feeffef</td>
+              <td>fefeeef</td>
+              <td>effeefeef</td>
+              <td>fefeeef</td>
+            </tr>
+            <tr>
+              <td>hefuhfuh</td>
+              <td>efeefeffefe</td>
+              <td>feffeef</td>
+              <td>feeffef</td>
+              <td>fefeeef</td>
+              <td>effeefeef</td>
+              <td>fefeeef</td>
+            </tr>
+            <tr>
+              <td>hefuhfuh</td>
+              <td>efeefeffefe</td>
+              <td>feffeef</td>
+              <td>feeffef</td>
+              <td>fefeeef</td>
+              <td>effeefeef</td>
+              <td>fefeeef</td>
+            </tr>
+            <tr>
+              <td>hefuhfuh</td>
+              <td>efeefeffefe</td>
+              <td>feffeef</td>
+              <td>feeffef</td>
+              <td>fefeeef</td>
+              <td>effeefeef</td>
+              <td>fefeeef</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
 
+
     <!-- Seção Unidades Notificantes -->
-    <div class="card col p-2">
+    <div class="card col-5 p-2">
       <h4>Unidades Notificantes</h4>
       <canvas></canvas>
       <!-- Seção Gráfico da positividade -->
