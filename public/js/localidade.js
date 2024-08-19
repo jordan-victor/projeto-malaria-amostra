@@ -105,6 +105,20 @@ function dashLocalidade(){
 
             //ESTILIZAÇÃO GERAL DO GRÁFICO
             options: {
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Positividade por semana',
+                        color: '#2a9e7f',
+                        font: {
+                            size: 21
+                        },
+                        padding: {
+                            top: 10,
+                            bottom: 30
+                        },
+                    }
+                },
                 scales: {
                     x: {
                         grid: {

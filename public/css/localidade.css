@@ -72,7 +72,6 @@
     display: flex;
     flex-direction: column;
 }
-
 #infecHeader{
     width: 100%;
     display: flex;
@@ -97,6 +96,75 @@
     border-radius: 15px;
 }
 
-#locInfec table{
+/*Corpo da tabela*/
+table{
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+}
+table thead{
+    border-bottom: 1px solid rgb(202, 202, 202);
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    color: rgb(71, 71, 71);
+}
+
+thead th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: inherit; /* Manter a cor do cabeçalho */
+    color: rgb(97, 97, 97);
+}
+
+tbody {
+    display: block;
+    max-height: 200px; /* Altura máxima do corpo da tabela */
+    overflow-y: auto;
+}
+
+tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+thead, tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+th, td {
+    text-align: left;
+}
+
+/*footer da tabela*/
+tfoot {
+    border-top: 1px solid rgb(202, 202, 202)!important;
+}
+thead, tbody tr, tfoot {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+th, td {
+    text-align: left;
+}
+
+thead{
+    width: 98%;
+}
+tfoot{
+    width: 98%;
+}
+
+/*tabela 2*/
+#tabela2 table thead{
+    border-bottom: 1px solid rgb(202, 202, 202)!important;
+}
+#tabela2 table{
     font-size: 12px;
 }

@@ -62,23 +62,23 @@
 
 
   <!------------2. SEÇÃO DOS INDICADORES E TOTAIS------------>
-  <section class="card shadow-none border-0 row d-flex flex-row gap-2 mb-3 bg-transparent">
+  <section class="shadow-none border-0 row d-flex flex-row gap-2 mb-3 bg-transparent">
     <!-- Seção Total de Notificações -->
-    <div class="card subCard p-2 col-2">
+    <div class="card subCard p-2 col-2 d-flex flex-column">
       <h4>Notificações</h4>
 
-      <div class="d-flex flex-center">
+      <div class="d-flex justify-content-center">
         <div><img src="/img/imgs_localidade/Notificando.png" alt="icone das notificações"></div>
         <h4>70000</h4>
       </div>
       
-      <p>LVC:</p>
+      <p class="text-center">LVC:</p>
     </div>
     
 
     <!-- Seção total de positivos -->
-    <div class="card subCard p-2 col-3">
-      <div class="d-flex flex-center">
+    <div class="card subCard p-2 col-3 d-flex flex-column">
+      <div class="d-flex justify-content-center">
         <div><img src="/img/imgs_localidade/positivo.png" alt="icone dos positivos"></div>
         <div>
           <h4>Positivos</h4>
@@ -86,7 +86,7 @@
         </div>
       </div>
     
-      <div class="d-flex flex-center gap-5">
+      <div class="d-flex justify-content-center gap-5">
         <p>Falciparum <br><span>LVC:</span> 999</p>
         <p>F+V <br><span>LVC:</span> 999</p>
         <p>Vívax<br><span>LVC:</span> 999</p>
@@ -95,8 +95,8 @@
 
 
     <!-- Seção autóctones e importados -->
-    <div class="card p-2 subCard col-2">
-      <div class="d-flex flex-center gap-1">
+    <div class="card p-2 subCard col-2 d-flex flex-column">
+      <div class="d-flex justify-content-center gap-1">
         <div><img src="/img/imgs_localidade/autoctones.png" alt="icone dos autóctones"></div>
         <div>
           <h4>Autóctones</h4>
@@ -104,7 +104,7 @@
         </div>
       </div>
       
-      <div class="d-flex flex-center gap-1">
+      <div class="d-flex justify-content-center gap-1">
         <div><img src="/img/imgs_localidade/importados.png" alt="icone dos importados"></div>
         <div>
           <h4>Importados</h4>
@@ -115,23 +115,24 @@
 
 
     <!-- Seção dos grupos prioritários -->
-    <div class="card p-2 subCard d-flex justify-content-start col" id="prioritarios">
-      <h4>Grupos Prioritários</h4>
-
-      <div class="d-flex w-100 justify-content-center justify-content-between" id="teste">
-        <div class="d-flex flex-center">
-          <div><img src="/img/imgs_localidade/gestante.png" alt="icone gestante"></div>
-          <p>Gestantes <br> <span>LVC:</span></p>
-        </div>
-        
-        <div class="d-flex flex-center gap-1">
-          <div><img src="/img/imgs_localidade/idosos.png" alt="icone idoso"></div>
-          <p>Idosos <br> <span>LVC:</span></p>
-        </div>
-        
-        <div class="d-flex flex-center gap-1">
-          <div><img src="/img/imgs_localidade/criancas.png" alt="icone criança"></div>
-          <p>Crianças <br> <span>LVC:</span></p>
+    <div class="card p-2 subCard d-flex flex-column col">
+      <h4 class="mt-0">Grupos Prioritários</h4>
+      <div class="d-flex justify-content-start flex-column justify-content-center">
+        <div class="d-flex w-100 justify-content-center justify-content-between">
+          <div class="d-flex">
+            <div><img src="/img/imgs_localidade/gestante.png" alt="icone gestante"></div>
+            <p>Gestantes <br> <span>LVC:</span></p>
+          </div>
+          
+          <div class="d-flex gap-1">
+            <div><img src="/img/imgs_localidade/idosos.png" alt="icone idoso"></div>
+            <p>Idosos <br> <span>LVC:</span></p>
+          </div>
+          
+          <div class="d-flex gap-1">
+            <div><img src="/img/imgs_localidade/criancas.png" alt="icone criança"></div>
+            <p>Crianças <br> <span>LVC:</span></p>
+          </div>
         </div>
       </div>
     </div>
@@ -163,25 +164,25 @@
         <button>Exibir local em mapa</button>
       </div>
       
-      <div id="infectBody" class="row">
-        <table class="table">
+      <div class="row p-3">
+        <table class="tabela">
           <thead>
             <tr>
-              <th>Cod+MunIBGE</th>
-              <th>Nome local</th>
-              <th>Positivo</th>
-              <th>Idoso</th>
-              <th>Criança</th>
-              <th>Gestante</th>
-              <th>Falcip.</th>
+              <th style="">Cod+MunIBGE</th>
+              <th style="">Nome local</th>
+              <th style="padding-right: 5px;">Positivo</th>
+              <th style="">Idoso</th>
+              <th style="">Criança</th>
+              <th style="">Gestante</th>
+              <th style="">Falcip.</th>
             </tr>
           </thead>
 
-          <div id="bodyTab"></div>
-          <tbody style="max-width:200px; overflow-y:scroll">
+          
+          <tbody>
             <tr>
               <td>hefuhfuh</td>
-              <td>efeefeffefe</td>
+              <td>efeefeff rggrg ssfvrrfve</td>
               <td>feffeef</td>
               <td>feeffef</td>
               <td>fefeeef</td>
@@ -190,7 +191,7 @@
             </tr>
             <tr>
               <td>hefuhfuh</td>
-              <td>efeefeffefe</td>
+              <td>efeefvf rrrggrrreffefe</td>
               <td>feffeef</td>
               <td>feeffef</td>
               <td>fefeeef</td>
@@ -199,7 +200,7 @@
             </tr>
             <tr>
               <td>hefuhfuh</td>
-              <td>efeefeffefe</td>
+              <td>efeeferrvrr fvrrrvrvrrffefe</td>
               <td>feffeef</td>
               <td>feeffef</td>
               <td>fefeeef</td>
@@ -208,7 +209,7 @@
             </tr>
             <tr>
               <td>hefuhfuh</td>
-              <td>efeefeffefe</td>
+              <td>efeeferrrrv fvvfvfvfvffefe</td>
               <td>feffeef</td>
               <td>feeffef</td>
               <td>fefeeef</td>
@@ -217,7 +218,7 @@
             </tr>
             <tr>
               <td>hefuhfuh</td>
-              <td>efeefeffefe</td>
+              <td>efeeffvvfvffvv fvfvvfeffefe</td>
               <td>feffeef</td>
               <td>feeffef</td>
               <td>fefeeef</td>
@@ -226,7 +227,7 @@
             </tr>
             <tr>
               <td>hefuhfuh</td>
-              <td>efeefeffefe</td>
+              <td>efeeffvfvvfv ffvfeffefe</td>
               <td>feffeef</td>
               <td>feeffef</td>
               <td>fefeeef</td>
@@ -235,25 +236,119 @@
             </tr>
             <tr>
               <td>hefuhfuh</td>
-              <td>efeefeffefe</td>
+              <td>efeeffvfvfv fv rrrrgrgeffefe</td>
               <td>feffeef</td>
               <td>feeffef</td>
               <td>fefeeef</td>
               <td>effeefeef</td>
               <td>fefeeef</td>
             </tr>
+            <tr>
           </tbody>
+
+          <tfoot>
+            <tr>
+              <th>Total</th>
+              <th></th>
+              <th>4.046</th>
+              <th>349</th>
+              <th>503</th>
+              <th>41</th>
+              <th>99</th>
+            </tr>
+          </tfoot>
         </table>
       </div>
     </div>
 
 
     <!-- Seção Unidades Notificantes -->
-    <div class="card col-5 p-2">
-      <h4>Unidades Notificantes</h4>
-      <canvas></canvas>
+    <div class="card col-5 p-2 d-flex flex-column">
+      <h4 style="text-align:left">Unidades Notificantes</h4>
+      <p style="font-size:12px; line-height:0px">(Origem das notificações positivas por localidade)</p> 
+      
+      <div id="tabela2" class="row px-3">
+        <table class="tabela">
+          <thead>
+            <tr>
+              <th style="">Cod+MunIBGE</th>
+              <th style="">Nome</th>
+              <th>Positivos</th>
+              <th>Falcip.</th>
+            </tr>
+          </thead>
+
+          
+          <tbody>
+            <tr>
+              <td>hefuhfuh</td>
+              <td>efeefeff rggrg ssfvrrfve</td>
+              <td>feffeef</td>
+              <td>feeffef</td>
+            </tr>
+            <tr>
+              <td>hefuhfuh</td>
+              <td>efeefvf rrrggrrreffefe</td>
+              <td>feffeef</td>
+              <td>feeffef</td>
+            </tr>
+            <tr>
+              <td>hefuhfuh</td>
+              <td>efeeferrvrr fvrrrvrvrrffefe</td>
+              <td>feffeef</td>
+              <td>feeffef</td>
+            </tr>
+            <tr>
+              <td>hefuhfuh</td>
+              <td>efeeferrrrv fvvfvfvfvffefe</td>
+              <td>feffeef</td>
+              <td>feeffef</td>
+            </tr>
+            <tr>
+              <td>hefuhfuh</td>
+              <td>efeeffvvfvffvv fvfvvfeffefe</td>
+              <td>feffeef</td>
+              <td>feeffef</td>
+            </tr>
+            <tr>
+              <td>hefuhfuh</td>
+              <td>efeeffvfvvfv ffvfeffefe</td>
+              <td>feffeef</td>
+              <td>feeffef</td>
+            </tr>
+            <tr>
+              <td>hefuhfuh</td>
+              <td>efeeffvfvfv fv rrrrgrgeffefe</td>
+              <td>feffeef</td>
+              <td>feeffef</td>
+            </tr>
+            <tr>
+              <td>hefuhfuh</td>
+              <td>efeeffvfvfv fv rrrrgrgeffefe</td>
+              <td>feffeef</td>
+              <td>feeffef</td>
+            </tr>
+            <tr>
+              <td>hefuhfuh</td>
+              <td>efeeffvfvfv fv rrrrgrgeffefe</td>
+              <td>feffeef</td>
+              <td>feeffef</td>
+            </tr>
+          </tbody>
+
+          <tfoot>
+            <tr>
+              <th>Total</th>
+              <th></th>
+              <th>4.046</th>
+              <th>99</th>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+     
+      
       <!-- Seção Gráfico da positividade -->
-      <!--<canvas></canvas>-->
     </div>
   </section>
 </main>
