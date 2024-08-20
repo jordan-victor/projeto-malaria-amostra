@@ -53,14 +53,17 @@
             </div>        
         </div>
    </footer>  
-
+   
 </body>
 <!--biblioteca charts.js-->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chartjs-chart-geo"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-chart-geo@3"></script>
+<!--<script src="https://cdn.jsdelivr.net/npm/chartjs-chart-geo"></script>-->
+
 
 <!--scripts js das páginas-->
 <script src="/js/localidade.js"></script>
+
 
 <!--bootstrap-->
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>

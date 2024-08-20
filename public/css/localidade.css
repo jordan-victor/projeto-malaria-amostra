@@ -4,7 +4,7 @@
 }
 .dashContainer i{
     color: #2a9e7f;
-    font-size: 30px;   
+    font-size: 25px;   
 }
 .dashContainer #limpar{
     cursor: pointer;
@@ -21,7 +21,18 @@
 .dashContainer .filtros p{
     line-height: 5px;
 }
-
+/*grupos prioritários*/
+.prioritario{
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.188);
+    border-top-right-radius: 20px;
+    padding: 5px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.prioritario:active{
+    transform: scale(0.96);
+    box-shadow: 3px 3px 2px rgba(0, 0, 0, 0.188);
+}
 
 
 
@@ -61,8 +72,6 @@
 .dashContainer .card .subCard span{
     font-size: 10px;
 }
-
-
 
 
 
@@ -167,4 +176,8 @@ tfoot{
 }
 #tabela2 table{
     font-size: 12px;
+}
+
+table i{
+    color: rgb(97, 97, 97)!important;
 }

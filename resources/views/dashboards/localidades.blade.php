@@ -10,7 +10,7 @@
 <!----------1. SEÇÃO DE FILTROS------------>
 <main class="dashContainer">
   <section class="filtros card p-2 mb-3 row">
-    <div class="col-1 d-flex-row" id="limpar">
+    <div class="col-1 d-flex-row" id="limpar" title="Limpar filtros">
       <i class="fa-solid fa-filter"></i>
       <p>Limpar</p>
     </div>
@@ -116,20 +116,21 @@
 
     <!-- Seção dos grupos prioritários -->
     <div class="card p-2 subCard d-flex flex-column col">
-      <h4 class="mt-0">Grupos Prioritários</h4>
+      <h4><i class="fa-solid fa-filter fs-5"></i> Grupos Prioritários</h4>
+          
       <div class="d-flex justify-content-start flex-column justify-content-center">
         <div class="d-flex w-100 justify-content-center justify-content-between">
-          <div class="d-flex">
+          <div class="d-flex prioritario" title="Filtrar gestantes">
             <div><img src="/img/imgs_localidade/gestante.png" alt="icone gestante"></div>
             <p>Gestantes <br> <span>LVC:</span></p>
           </div>
           
-          <div class="d-flex gap-1">
+          <div class="d-flex gap-1 prioritario" title="Filtrar idosos">
             <div><img src="/img/imgs_localidade/idosos.png" alt="icone idoso"></div>
             <p>Idosos <br> <span>LVC:</span></p>
           </div>
           
-          <div class="d-flex gap-1">
+          <div class="d-flex gap-1 prioritario" title="Filtrar crianças">
             <div><img src="/img/imgs_localidade/criancas.png" alt="icone criança"></div>
             <p>Crianças <br> <span>LVC:</span></p>
           </div>
@@ -155,7 +156,7 @@
   </section>
 
 
-  <section class="row d-flex flex-row gap-2">
+  <section class="row d-flex flex-row gap-2 mb-3">
     <!-- Seção Locais prováveis de infecção -->
     <div class="card col p-2" id="locInfec">
       <div id="infecHeader">
@@ -168,13 +169,13 @@
         <table class="tabela">
           <thead>
             <tr>
-              <th style="">Cod+MunIBGE</th>
-              <th style="">Nome local</th>
-              <th style="padding-right: 5px;">Positivo</th>
-              <th style="">Idoso</th>
-              <th style="">Criança</th>
-              <th style="">Gestante</th>
-              <th style="">Falcip.</th>
+              <th>Cod+MunIBGE</th>
+              <th>Nome local</th>
+              <th>Positivo <i class="fa-solid fa-sort-down fs-6"></i></th>
+              <th>Idoso <i class="fa-solid fa-sort-down fs-6"></i></th>
+              <th>Criança <i class="fa-solid fa-sort-down fs-6"></i></th>
+              <th>Gestante <i class="fa-solid fa-sort-down fs-6"></i></th>
+              <th>Falcip. <i class="fa-solid fa-sort-down fs-6"></i></th>
             </tr>
           </thead>
 
@@ -273,8 +274,8 @@
             <tr>
               <th style="">Cod+MunIBGE</th>
               <th style="">Nome</th>
-              <th>Positivos</th>
-              <th>Falcip.</th>
+              <th>Positivos <i class="fa-solid fa-sort-down fs-6"></i></th>
+              <th>Falcip. <i class="fa-solid fa-sort-down fs-6"></i></th>
             </tr>
           </thead>
 
@@ -346,9 +347,23 @@
           </tfoot>
         </table>
       </div>
-     
-      
-      <!-- Seção Gráfico da positividade -->
+    </div>
+  </section>
+
+
+
+
+
+
+
+
+
+  <!--MAPA DE LOCALIDADES-->
+  <section class="row card p-2">
+    <h4 style="text-align:left">Positivos por localidade (Coordenada Geográfica)</h4>
+
+    <div class="mapaContainer">
+      <canvas id="mapaLocalidades" height="100"></canvas>
     </div>
   </section>
 </main>
