@@ -144,45 +144,24 @@ function dashLocalidade(){
 
 //FUNÇÃO PARA GERAR O MAPA DE LOCALIDADES
 function mapaLocalidades(){ 
-    // Carrega o mapa base (usando GeoJSON)
-    fetch('https://unpkg.com/world-atlas/countries-50m.json').then(response => response.json()).then(countries => {
-        const countriesFeatures = ChartGeo.topojson.feature(countries, countries.objects.countries).features;
+    // Inicialize o mapa e defina a visualização inicial
+    const mapa = L.map('mapaLocalidades').setView([-3.1190275, -60.0217314], 11); // Coordenadas de Manaus
 
-        // Dados de exemplo de pontos
-        const dataPoints = [
-            { name: 'Manaus', latitude: -3.119, longitude: -60.0217, value: 100 },
-            { name: 'Parintins', latitude: -2.6283, longitude: -56.7359, value: 50 }
-        ];
+    // Adicione uma camada de mapa (Tile Layer)
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap contributors'
+    }).addTo(mapa);
 
-        // Configuração do gráfico
-        const ctx = document.getElementById('mapaLocalidades').getContext('2d');
-        const mapa = new Chart(ctx, {
-            type: 'bubbleMap',  // Define o tipo de gráfico como um mapa de pontos
-            data: {
-                labels: dataPoints.map(point => point.name),
-                datasets: [{
-                    label: 'Cidades do Amazonas',
-                    data: dataPoints.map(point => ({
-                        latitude: point.latitude,
-                        longitude: point.longitude,
-                        radius: point.value / 10 // Escala o valor do ponto
-                    })),
-                    backgroundColor: 'rgba(54, 162, 235, 0.6)',
-                    borderColor: 'rgba(54, 162, 235, 1)',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                scales: {
-                    xy: {
-                        projection: 'equalEarth'
-                    }
-                }
-            }
-        });
-    });
+    // Adicione marcadores (pontos) no mapa
+    let latitude = "-3.145377"
+    let longitude = "-60.054570"
+    let positivo = 20
+    
+    const marker1 = L.marker([-3.1190275, -60.0217314]).addTo(mapa).bindPopup('Ponto 1');
+    const marker2 = L.marker([-3.135475, -60.019189]).addTo(mapa).bindPopup('Ponto 2');
+    const marker3 = L.marker([-3.108475, -60.045028]).addTo(mapa).bindPopup('Ponto 3');
+    const marker4 = L.marker([-3.145377, -60.054570]).addTo(mapa).bindPopup(`Latitude: ${latitude}<br>Longitude: ${longitude}<br> Positivos: ${positivo}`);   
 }
 
 dashLocalidade()
-//mapaLocalidades()
+mapaLocalidades()

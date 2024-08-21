@@ -169,7 +169,7 @@ thead{
 tfoot{
     width: 98%;
 }
-
+ 
 /*tabela 2*/
 #tabela2 table thead{
     border-bottom: 1px solid rgb(202, 202, 202)!important;
@@ -180,4 +180,9 @@ tfoot{
 
 table i{
     color: rgb(97, 97, 97)!important;
+}
+
+/*mapa*/
+#mapaLocalidades{
+    outline: none;
 }

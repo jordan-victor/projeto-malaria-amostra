@@ -55,11 +55,11 @@
    </footer>  
    
 </body>
-<!--biblioteca charts.js-->
+<!--biblioteca charts.js para gráficos e para gerar mapas-->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chartjs-chart-geo@3"></script>
-<!--<script src="https://cdn.jsdelivr.net/npm/chartjs-chart-geo"></script>-->
-
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+ 
 
 <!--scripts js das páginas-->
 <script src="/js/localidade.js"></script>

@@ -363,12 +363,27 @@
     <h4 style="text-align:left">Positivos por localidade (Coordenada Geográfica)</h4>
 
     <div class="mapaContainer">
-      <canvas id="mapaLocalidades" height="100"></canvas>
+      <div id="mapaLocalidades" style="height: 500px;"></div>
     </div>
   </section>
 </main>
 
 
 
+<script>
+  /*Apenas um teste, apagar depois*/
+  let array = []
 
+  @foreach($teste as $i=>$t)
+    let elemento{{$i}} = {{$i}}
+    array.push(elemento{{$i}})
+  @endforeach
+
+  alert(array.length)
+  //alert(array[0])
+  array.forEach((element, i) => {
+    alert(i)
+  });
+  /*---------------------------*/
+</script>
 @endsection
