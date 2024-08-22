@@ -18,16 +18,19 @@
     <link rel="stylesheet" href="/css/geral.css">
     <link rel="stylesheet" href="/css/home.css">
     <link rel="stylesheet" href="/css/localidade.css">
+    <link rel="stylesheet" href="/css/alerta.css">
 </head>
 
 <body id="body">
-    <!--TODO O CONTEÚDO DAS OUTRAS PÁGINAS SERÃO IMPORTADOS PARA DENTRO DESSE CONTAINER-->
     <div class="corpo">
        <header>
             @include('layouts.navbar')
        </header>
 
-        @yield('content')   
+        <!--TODO O CONTEÚDO DAS OUTRAS PÁGINAS SERÃO IMPORTADOS PARA DENTRO DESSE CONTAINER-->
+       <main>
+            @yield('content')
+       </main>      
     </div>
 
 
@@ -46,7 +49,10 @@
             <img src="/img/geral/prefeitura.png" width="250px" alt="">
             
             <div>
-                <p>&copy;{{$data}} - Prefeitura de Manaus</p>
+                @isset($data)
+                    <p>&copy;{{$data}} - Prefeitura de Manaus</p>    
+                @endisset
+                <p>Prefeitura de Manaus</p>
                 <p>Secretaria Municipal de Saúde - SEMSA</p>
                 <p>Departamento do Distrito de Saúde Rural - DISAR</p>
                 <p>Gerência de Inteligência de Dados Rural - GEIND-R</p> 

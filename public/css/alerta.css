@@ -1,0 +1,30 @@
+#alertaContainer h4{
+    color: #2a9e7f;
+    line-height: 20px;
+}
+#alertaContainer p{
+    line-height: 0px;
+}
+
+#alertaContainer button[type="submit"]{
+    background-color: #2a9e7f;
+    color: white;
+}
+
+#alertaContainer section{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+#alertaContainer #formAlerta{
+    width: 400px;
+}
+
+.dadosPaciente div{
+    flex: 1;
+}
+.dadosPaciente div input{
+    width: 300px;
+}

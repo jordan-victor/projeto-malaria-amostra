@@ -25,9 +25,11 @@
 
 
         <section class="cards2">
-            <div class="carta">
-                <img src="/img/home/alerta.png" alt="Alerta Malária" style="width: 160px;">
-            </div>
+            <a href="{{route('alerta')}}">
+                <div class="carta">
+                    <img src="/img/home/alerta.png" alt="Alerta Malária" style="width: 160px;">
+                </div>
+            </a>
 
             <div class="carta">
                 <img src="/img/home/indicadores.png" alt="Malariômetro Localidades" width="150">
