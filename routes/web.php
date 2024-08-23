@@ -2,6 +2,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\alertaController;
+use App\Http\Controllers\notificacaoController;
 
 
 
@@ -36,8 +37,13 @@ Route::get('/localidades', function(){
 
 
 
-
-
-//Rotas do Alerta Malária
+//Rotas da tela Alerta Malária
 Route::get('/alerta', [alertaController::class, 'showAlerta'])->name('alerta');
 Route::get('/casos', [alertaController::class, 'mostrarCasos'])->name('casos');
+
+
+
+
+
+//Rotas da tela Notificações
+Route::get('/notificacao', [notificacaoController::class, 'showNotificacao'])->name('notificacao');

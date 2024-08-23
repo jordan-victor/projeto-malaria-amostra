@@ -48,41 +48,45 @@
     flex-direction: column;
 }
 
-
+#alertaContainer tbody{
+    max-height: 500px!important;
+}
 #alertaContainer .tabelaContainer{
     overflow-x: scroll;
 }
 
 #alertaContainer table thead{
     background-color: #2a9e7f;
+    width: 100%!important;
 }
-#alertaContainer table thead th{
+#alertaContainer table th{
     color: white;
 }
 
 /* Estilo básico para a tabela */
-#alertaContainer table {
+#alertaContainer table{
     width: 100%;
     border-collapse: collapse; /* Remove espaçamento entre células */
-    margin: 20px 0; /* Espaço ao redor da tabela */
-    font-size: 16px; /* Tamanho da fonte */
-    text-align: left; /* Alinhamento do texto */
+    margin: 20px 0;
+    font-size: 16px;
+    text-align: left;
 }
   
 /* Estilo para as células da tabela */
 #alertaContainer th, td {
-padding: 3px; /* Espaçamento interno das células */
-border: 1px solid #dddddd; /* Borda das células */
+padding: 3px; 
+border: 1px solid #dddddd;
 }
 #alertaContainer td{
-    border: 1px solid #aec8c1;
+    border: 1px solid #bad5ce;
 }
-/* Estilo para o cabeçalho da tabela */
 #alertaContainer th {
-text-transform: uppercase; /* Texto em maiúsculas */
+text-transform: uppercase;
+}
+#alertaContainer tr:nth-child(even) {
+background-color: #dbfff6; /* Cor de fundo alternada */
 }
 
-/* Estilo para as linhas alternadas */
-#alertaContainer tr:nth-child(even) {
-background-color: #d0fff3; /* Cor de fundo alternada */
+#alertaContainer tbody tr td:nth-child(3){/*tamanho da celula DATA NOTIFIC ajustado*/
+    width: 200px;
 }

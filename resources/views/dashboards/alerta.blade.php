@@ -30,9 +30,10 @@
             <h4>DADOS DOS PACIENTES</h4>
             <!--Filtro tabela-->
             <form action="" method="GET" id="formPesquisarPaciente">
+                @csrf
                 <label for="pesquisar">Pesquisar paciente</label>
                 <div class="d-flex gap-1">
-                    <input type="text" name="" id="pesquisar" class="form-control" placeholder="Código da Notificação" required style="width: 300px;">
+                    <input type="text" name="cod_notific" id="pesquisar" class="form-control" placeholder="Código da Notificação" required style="width: 300px;">
                     <button type="submit" class="btn" style="width: 100px; box-shadow:none">Pesquisar</button>  
                 </div>  
             </form>
@@ -46,7 +47,7 @@
                             <tr>
                                 <th>COD NOTIFIC.</th>
                                 <th>NOME</th>
-                                <th>DATA NOTIFIC.</th>
+                                <th style="width:200px">DATA NOTIFIC.</th>
                                 <!--<th>UNIDADE NOTIFIC.</th>-->
                                 <th>TIPO EXAME</th>
                                 <th>RESULTADO</th>
@@ -61,6 +62,62 @@
                         </thead>
 
                         <tbody>
+                            <tr>
+                                <td>34373665</td>
+                                <td>JORDAN VICTOR BARREIROS DA COSTA</td>
+                                <td>23/08/2024</td>
+                                <td>TIPO EXAME</td>
+                                <td>POSITIVO</td>
+                            </tr>
+                            <tr>
+                                <td>34373665</td>
+                                <td>JORDAN VICTOR BARREIROS DA COSTA</td>
+                                <td>23/08/2024</td>
+                                <td>TIPO EXAME</td>
+                                <td>POSITIVO</td>
+                            </tr>
+                            <tr>
+                                <td>34373665</td>
+                                <td>JORDAN VICTOR BARREIROS DA COSTA</td>
+                                <td>23/08/2024</td>
+                                <td>TIPO EXAME</td>
+                                <td>POSITIVO</td>
+                            </tr>
+                            <tr>
+                                <td>34373665</td>
+                                <td>JORDAN VICTOR BARREIROS DA COSTA</td>
+                                <td>23/08/2024</td>
+                                <td>TIPO EXAME</td>
+                                <td>POSITIVO</td>
+                            </tr>
+                            <tr>
+                                <td>34373665</td>
+                                <td>JORDAN VICTOR BARREIROS DA COSTA</td>
+                                <td>23/08/2024</td>
+                                <td>TIPO EXAME</td>
+                                <td>POSITIVO</td>
+                            </tr>
+                            <tr>
+                                <td>34373665</td>
+                                <td>JORDAN VICTOR BARREIROS DA COSTA</td>
+                                <td>23/08/2024</td>
+                                <td>TIPO EXAME</td>
+                                <td>POSITIVO</td>
+                            </tr>
+                            <tr>
+                                <td>34373665</td>
+                                <td>JORDAN VICTOR BARREIROS DA COSTA</td>
+                                <td>23/08/2024</td>
+                                <td>TIPO EXAME</td>
+                                <td>POSITIVO</td>
+                            </tr>
+                            <tr>
+                                <td>34373665</td>
+                                <td>JORDAN VICTOR BARREIROS DA COSTA</td>
+                                <td>23/08/2024</td>
+                                <td>TIPO EXAME</td>
+                                <td>POSITIVO</td>
+                            </tr>
                             <tr>
                                 <td>34373665</td>
                                 <td>JORDAN VICTOR BARREIROS DA COSTA</td>

@@ -16,7 +16,7 @@ class alertaController extends Controller
 
 
 
-    
+
     //MOSTRAR TODOS OS CASOS
     public function mostrarCasos(){
         date_default_timezone_set('America/Manaus');
@@ -25,4 +25,9 @@ class alertaController extends Controller
 
         return view('dashboards.alerta', ['data'=>$data]);
     }
+
+
+
+
+    //FILTROS ACOMPANHAMENTO
 }
