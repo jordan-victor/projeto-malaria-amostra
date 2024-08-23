@@ -52,7 +52,6 @@
                 @isset($data)
                     <p>&copy;{{$data}} - Prefeitura de Manaus</p>    
                 @endisset
-                <p>Prefeitura de Manaus</p>
                 <p>Secretaria Municipal de Saúde - SEMSA</p>
                 <p>Departamento do Distrito de Saúde Rural - DISAR</p>
                 <p>Gerência de Inteligência de Dados Rural - GEIND-R</p> 

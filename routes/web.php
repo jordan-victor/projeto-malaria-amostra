@@ -40,4 +40,4 @@ Route::get('/localidades', function(){
 
 //Rotas do Alerta Malária
 Route::get('/alerta', [alertaController::class, 'showAlerta'])->name('alerta');
-Route::get('/buscarPaciente', [alertaController::class, 'buscarPaciente'])->name('buscarPaciente');
+Route::get('/casos', [alertaController::class, 'mostrarCasos'])->name('casos');

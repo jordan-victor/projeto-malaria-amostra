@@ -12,4 +12,17 @@ class alertaController extends Controller
 
         return view('dashboards.alerta', ['data'=>$data]);
     }
+
+
+
+
+    
+    //MOSTRAR TODOS OS CASOS
+    public function mostrarCasos(){
+        date_default_timezone_set('America/Manaus');
+        $data = date('Y');
+
+
+        return view('dashboards.alerta', ['data'=>$data]);
+    }
 }
