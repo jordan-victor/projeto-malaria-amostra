@@ -71,7 +71,7 @@
     font-size: 16px;
     text-align: left;
 }
-  
+
 /* Estilo para as células da tabela */
 #alertaContainer th, td {
 padding: 3px; 
@@ -87,6 +87,16 @@ text-transform: uppercase;
 background-color: #dbfff6; /* Cor de fundo alternada */
 }
 
-#alertaContainer tbody tr td:nth-child(3){/*tamanho da celula DATA NOTIFIC ajustado*/
+/*Ajustando a larguras das colunas*/
+#alertaContainer tbody tr td:nth-child(3){
+    width: 130px;
+}
+#alertaContainer tbody tr td:nth-child(1){
+    width: 100px;
+}
+#alertaContainer tbody tr td:nth-child(4){
     width: 200px;
+}
+#alertaContainer tbody tr td:nth-child(5){
+    width: 130px;
 }

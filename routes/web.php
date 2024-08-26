@@ -40,6 +40,7 @@ Route::get('/localidades', function(){
 //Rotas da tela Alerta Malária
 Route::get('/alerta', [alertaController::class, 'showAlerta'])->name('alerta');
 Route::get('/casos', [alertaController::class, 'mostrarCasos'])->name('casos');
+Route::get('/filtrar_caso', [alertaController::class, 'filtrar_caso'])->name('filtrar_caso');
 
 
 
