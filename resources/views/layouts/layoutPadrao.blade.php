@@ -68,6 +68,7 @@
 
 <!--scripts js das páginas-->
 <script src="/js/localidade.js"></script>
+<script src="/js/alerta.js"></script>
 
 
 <!--bootstrap-->

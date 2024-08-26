@@ -168,13 +168,4 @@
 
 
 
-<script>
-//SCRIPTS ALERTA
-let inputPesquisa = document.getElementById("pesquisar")
-inputPesquisa.addEventListener('input', ()=>{
-    let conveterMaiusculo = document.getElementById("pesquisar").value
-    conveterMaiusculo.value = "teste"
-})
-
-</script>
 @endsection
