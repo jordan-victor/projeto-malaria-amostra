@@ -19,6 +19,9 @@ class Outroteste extends Model
         'res_exame',
         'dt_noti',
         'tp_exame',
-        'nm_paciente'
+        'nm_paciente',
+        'dt_nasci',
+        'id_lvc',
+        'loc_infec'
     ];
 }

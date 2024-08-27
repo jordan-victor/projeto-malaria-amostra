@@ -23,8 +23,11 @@ class alertaController extends Controller
         date_default_timezone_set('America/Manaus');
         $data = date('Y');
         $msg = null;
-        //$positivos = Outroteste::where('res_exame', '!=', 1)->paginate(20);
-        $positivos = Outroteste::where('res_exame', '!=', 1)->get();
+        
+        $positivos = Outroteste::where('res_exame', '!=', 1)
+                                ->where('id_lvc', '!=', 1)->paginate(20);
+
+       //criar uma condição para converter o campo data de nascimento que está em branco para um traço " - "
 
         return view('dashboards.alerta', ['data'=>$data, 'positivos'=>$positivos, 'msg'=>$msg]);
     }
@@ -40,7 +43,9 @@ class alertaController extends Controller
     
         $inputPesquisa = $request->nome_paciente;
         $positivos = Outroteste::where('nm_paciente', 'like', '%'.$inputPesquisa.'%')
-                                ->where('res_exame', '!=', 1)->get();
+                                ->where('res_exame', '!=', 1)
+                                ->where('id_lvc', '!=', 1)->paginate(20);
+
 
         if(count($positivos) == 0){
             $msg = "Paciente não encontrado";

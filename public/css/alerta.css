@@ -89,15 +89,24 @@ background-color: #dbfff6; /* Cor de fundo alternada */
 }
 
 /*Ajustando a larguras das colunas*/
-#alertaContainer tbody tr td:nth-child(3){
-    width: 130px;
-}
 #alertaContainer tbody tr td:nth-child(1){
     width: 100px;
 }
-#alertaContainer tbody tr td:nth-child(4){
-    width: 200px;
-}
-#alertaContainer tbody tr td:nth-child(5){
+#alertaContainer tbody tr td:nth-child(3){
     width: 130px;
 }
+#alertaContainer tbody tr td:nth-child(4){
+    width: 130px;
+}
+#alertaContainer tbody tr td:nth-child(5){
+    width: 200px;
+}
+#alertaContainer tbody tr td:nth-child(6){
+    width: 130px;
+}
+
+
+
+
+
+/*estilo da paginação de registros*/

@@ -33,7 +33,7 @@
                 @csrf
                 <label for="pesquisar">Pesquisar paciente</label>
                 <div class="d-flex gap-1">
-                    <input type="text" name="nome_paciente" id="nome_paciente" class="form-control" placeholder="Nome do paciente" required style="width: 300px;">
+                    <input type="text" name="nome_paciente" id="nome_paciente" class="form-control" placeholder="Nome" required style="width: 300px;">
                     <button type="submit" class="btn" style="width: 100px; box-shadow:none">Pesquisar</button>  
                 </div>  
             </form>
@@ -45,13 +45,14 @@
                     <table>
                         <thead>
                             <tr>
-                                <th style="width:100px">COD NOTIFIC.</th>
+                                <th style="width:100px">COD NOTIF.</th>
                                 <th>NOME</th>
-                                <th style="width:130px">DATA NOTIFIC.</th>
+                                <th style="width:130px">DATA NASC.</th>
+                                <th style="width:130px">DATA NOTIF.</th>
                                 <!--<th>UNIDADE NOTIFIC.</th>-->
                                 <th style="width:200px">TIPO EXAME</th>
                                 <th style="width:130px">RESULTADO</th>
-                                <!-- <th>LOCAL INFEC.</th> -->
+                                <th>LOCAL INFEC.</th>
                                 <!-- <th>DISA DE INFEC.</th>
                                 <th>DISA DE ACOMPANHAMENTO</th>
                                 <th>ATENDIDO NA UBS?</th>
@@ -66,8 +67,12 @@
                                 @foreach($positivos as $positivo)
                                     <tr>
                                         <td>{{$positivo->cod_noti}}</td>
+                                        
                                         <td>{{$positivo->nm_paciente}}</td>
-                                        <td>{{$positivo->dt_noti}}</td>
+                                       
+                                        <td>{{\Carbon\Carbon::parse($positivo->dt_nasci)->format('d/m/Y')}}</td>
+                                               
+                                        <td>{{\Carbon\Carbon::parse($positivo->dt_noti)->format('d/m/Y')}}</td>
 
 
                                         @if($positivo->tp_exame == '1')
@@ -100,6 +105,8 @@
                                         @elseif($positivo->res_exame == '11')
                                             <td>Não Falciparum</td>   
                                         @endif
+
+                                        <td>{{$positivo->loc_infec}}</td>
                                     </tr>
                                 @endforeach
                             @endisset
@@ -107,8 +114,14 @@
                     </table>
 
                     @isset($msg)
-                        <p class="text-center">{{$msg}}</p>
-                    @endisset   
+                        <p class="text-center">{{$msg}} <i class="fa-solid fa-triangle-exclamation"></i></p>
+                    @endisset
+                    
+                    <div class="container_paginacao">
+                        @isset($positivos)
+                            {{ $positivos->links('pagination::bootstrap-5') }}    
+                        @endisset   
+                    </div>
                 </div>   
             </div>
             <!---------->
