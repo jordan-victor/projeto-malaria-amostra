@@ -22,7 +22,7 @@ Route::get('/', function () {
 
 
 
-//Rota para abrir a página do dashboard
+//Rota para abrir a página do dashboard localidade
 Route::get('/localidades', function(){
     date_default_timezone_set('America/Manaus');
     $data = date('Y');

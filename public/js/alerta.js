@@ -1,5 +1,6 @@
 //SCRIPTS ALERTA
-let inputPesquisa = document.getElementById("pesquisar")
+let inputPesquisa = document.getElementById("nome_paciente")
 inputPesquisa.addEventListener('input', ()=>{
-    input = document.getElementById("pesquisar").value.toUpperCase()
+    let inputNomePaciente = document.form_pesquisa_paciente.nome_paciente.value.toUpperCase()
+    document.form_pesquisa_paciente.nome_paciente.value = inputNomePaciente
 })

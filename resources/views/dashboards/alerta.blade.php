@@ -29,11 +29,11 @@
         <section class="card dadosPaciente p-2">
             <h4>DADOS DOS PACIENTES</h4>
             <!--Filtro tabela-->
-            <form action="{{route('filtrar_caso')}}" method="GET" id="formPesquisarPaciente">
+            <form action="{{route('filtrar_caso')}}" method="GET" id="formPesquisarPaciente" name="form_pesquisa_paciente">
                 @csrf
                 <label for="pesquisar">Pesquisar paciente</label>
                 <div class="d-flex gap-1">
-                    <input type="text" name="cod_notific" id="pesquisar" class="form-control" placeholder="Nome do paciente" required style="width: 300px;">
+                    <input type="text" name="nome_paciente" id="nome_paciente" class="form-control" placeholder="Nome do paciente" required style="width: 300px;">
                     <button type="submit" class="btn" style="width: 100px; box-shadow:none">Pesquisar</button>  
                 </div>  
             </form>
@@ -98,9 +98,7 @@
                                         @elseif($positivo->res_exame == '10')
                                             <td>Ovale</td>
                                         @elseif($positivo->res_exame == '11')
-                                            <td>Não Falciparum</td>
-                                        elseif(empty($positivo->res_exame))
-                                           <td>-</td> 
+                                            <td>Não Falciparum</td>   
                                         @endif
                                     </tr>
                                 @endforeach
@@ -108,9 +106,9 @@
                         </tbody>
                     </table>
 
-                    @empty($msg)
-                        <p>{{$msg}}</p>
-                    @endempty
+                    @isset($msg)
+                        <p class="text-center">{{$msg}}</p>
+                    @endisset   
                 </div>   
             </div>
             <!---------->
@@ -161,11 +159,4 @@
         </section>
     </div>
 </div>
-
-
-
-
-
-
-
 @endsection

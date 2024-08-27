@@ -32,16 +32,17 @@ class alertaController extends Controller
 
 
 
-    //FILTROS ACOMPANHAMENTO
+    //FILTROS ACOMPANHAMENTO DE CASOS
     public function filtrar_caso(Request $request){
         date_default_timezone_set('America/Manaus');
         $data = date('Y');
         $msg = null;
     
-        $inputFiltro = $request->cod_notific;
-        $positivos = Outroteste::where('nm_paciente', 'like', '%'.$inputFiltro.'%')->get();
+        $inputPesquisa = $request->nome_paciente;
+        $positivos = Outroteste::where('nm_paciente', 'like', '%'.$inputPesquisa.'%')
+                                ->where('res_exame', '!=', 1)->get();
 
-        if(isset($positivos)){
+        if(count($positivos) == 0){
             $msg = "Paciente não encontrado";
         }
 

@@ -74,8 +74,9 @@
 
 /* Estilo para as células da tabela */
 #alertaContainer th, td {
-padding: 3px; 
-border: 1px solid #dddddd;
+    padding: 3px; 
+    border: 1px solid;
+    padding: 10px!important;
 }
 #alertaContainer td{
     border: 1px solid #bad5ce;
