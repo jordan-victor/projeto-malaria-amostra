@@ -106,7 +106,7 @@
                                             <td>Não Falciparum</td>   
                                         @endif
 
-                                        <td>{{$positivo->loc_infec}}</td>
+                                        <td>{{$positivo->nm_local}}</td>
                                     </tr>
                                 @endforeach
                             @endisset
