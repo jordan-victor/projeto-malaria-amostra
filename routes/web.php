@@ -3,7 +3,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\alertaController;
 use App\Http\Controllers\notificacaoController;
-
+use App\Http\Controllers\localidadesController;
 
 
 
@@ -23,15 +23,7 @@ Route::get('/', function () {
 
 
 //Rota para abrir a página do dashboard localidade
-Route::get('/localidades', function(){
-    date_default_timezone_set('America/Manaus');
-    $data = date('Y');
-    
-    //-----------------Teste, apagar depois----------------------
-    $teste = [1,2,3,4];
-    //-----------------------------------------------------------
-    return view('dashboards.localidades', ['data'=>$data, 'teste'=>$teste]);
-})->name('localidades');
+Route::get('/localidades', [localidadesController::class, 'showLocalidades'])->name('localidades');
 
 
 

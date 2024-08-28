@@ -69,7 +69,7 @@
 
       <div class="d-flex justify-content-center">
         <div><img src="/img/imgs_localidade/Notificando.png" alt="icone das notificações"></div>
-        <h4>70000</h4>
+        <h4>{{$notificacoes}}</h4>
       </div>
       
       <p class="text-center">LVC:</p>
@@ -82,7 +82,7 @@
         <div><img src="/img/imgs_localidade/positivo.png" alt="icone dos positivos"></div>
         <div>
           <h4>Positivos</h4>
-          <h4>9999</h4>
+          <h4>{{$positivos}}</h4>
         </div>
       </div>
     
@@ -379,10 +379,9 @@
     array.push(elemento{{$i}})
   @endforeach
 
-  alert(array.length)
-  //alert(array[0])
+  
   array.forEach((element, i) => {
-    alert(i)
+    console.log(i)
   });
   /*---------------------------*/
 </script>

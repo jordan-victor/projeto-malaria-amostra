@@ -22,6 +22,8 @@ class Outroteste extends Model
         'nm_paciente',
         'dt_nasci',
         'id_lvc',
-        'loc_infec'
+        'loc_infec',
+        'dt_sinto',
+        'dt_trata'
     ];
 }

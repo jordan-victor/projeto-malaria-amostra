@@ -11,7 +11,14 @@ class alertaController extends Controller
         $data = date('Y');
         $msg = null;
 
-        return view('dashboards.alerta', ['data'=>$data, 'msg'=>$msg]);
+        //Tipos de resultado
+        $resultados = DB::table('outroteste')
+                        ->select('res_exame')
+                        ->where('res_exame', '!=', 1)
+                        ->distinct()->get();
+
+                        
+        return view('dashboards.alerta', ['data'=>$data, 'msg'=>$msg, 'resultados'=>$resultados]);
     }
 
 
@@ -29,6 +36,13 @@ class alertaController extends Controller
         $data = date('Y');
         $msg = null;
         
+        //Tipos de resultado
+        $resultados = DB::table('outroteste')
+                        ->select('res_exame')
+                        ->where('res_exame', '!=', 1)
+                        ->distinct()->get();
+
+
         //tabela dos casos positivos
         $positivos = DB::table('outroteste')
                                 ->leftJoin('localidades', 'outroteste.loc_infec', '=', 'localidades.cod_local')
@@ -37,10 +51,8 @@ class alertaController extends Controller
                                 ->where('id_lvc', '!=', 1)
                                 ->orderBy('id_not', 'desc')
                                 ->paginate(20);
-
-       //criar uma condição para converter o campo data de nascimento que está em branco para um traço " - "
     
-        return view('dashboards.alerta', ['data'=>$data, 'positivos'=>$positivos, 'msg'=>$msg]);
+        return view('dashboards.alerta', ['data'=>$data, 'positivos'=>$positivos, 'msg'=>$msg, 'resultados'=>$resultados]);
     }
 
 
@@ -58,6 +70,14 @@ class alertaController extends Controller
         $data = date('Y');
         $msg = null;
     
+        //Tipos de resultado
+        $resultados = DB::table('outroteste')
+                        ->select('res_exame')
+                        ->where('res_exame', '!=', 1)
+                        ->distinct()->get();
+        
+
+        //Nome pesquisado
         $inputPesquisa = $request->nome_paciente;
         $positivos = Outroteste::leftJoin('localidades', 'outroteste.loc_infec', '=', 'localidades.cod_local')
                                 ->where('mun_ibge', '=', 130260)//Só de Manaus
@@ -72,6 +92,6 @@ class alertaController extends Controller
             $msg = "Paciente não encontrado";
         }
 
-        return view('dashboards.alerta', ['data'=>$data, 'positivos'=>$positivos, 'msg'=>$msg]);
+        return view('dashboards.alerta', ['data'=>$data, 'positivos'=>$positivos, 'msg'=>$msg, 'resultados'=>$resultados]);
     }
 }

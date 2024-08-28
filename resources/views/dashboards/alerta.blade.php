@@ -28,15 +28,45 @@
         <!--SEÇÃO DE EXIBIÇÃO DE DADOS DOS PACIENTES-->
         <section class="card dadosPaciente p-2">
             <h4>DADOS DOS PACIENTES</h4>
-            <!--Filtro tabela-->
-            <form action="{{route('filtrar_caso')}}" method="GET" id="formPesquisarPaciente" name="form_pesquisa_paciente">
-                @csrf
-                <label for="pesquisar">Pesquisar paciente</label>
-                <div class="d-flex gap-1">
-                    <input type="text" name="nome_paciente" id="nome_paciente" class="form-control" placeholder="Nome" required style="width: 300px;">
-                    <button type="submit" class="btn" style="width: 100px; box-shadow:none">Pesquisar</button>  
-                </div>  
-            </form>
+            <!--Filtros tabela-->
+            <div class="filtros_res d-flex gap-4">
+                <!--filtro pelo nome-->
+                <form action="{{route('filtrar_caso')}}" method="GET" id="formPesquisarPaciente" name="form_pesquisa_paciente">
+                    @csrf
+                    <label for="pesquisar">Pesquisar paciente</label>
+                    <div class="d-flex gap-1">
+                        <input type="text" name="nome_paciente" id="nome_paciente" class="form-control" placeholder="Nome" required style="width: 250px;">
+                        <button type="submit" class="btn" style="width: 100px; box-shadow:none">Pesquisar</button>  
+                    </div>  
+                </form>
+
+                <!--Filtro por tipo de resultado-->
+                <form action="" method="GET">
+                    @csrf
+                    <label for="filtro_resultado">Filtrar Resultado</label>
+                    <select name="filtro_resultado" id="select_resultados" class="form-select" style="width: 250px;" required>
+                        <option>Todos</option>
+                        @foreach($resultados as $resultado)
+                            @if($resultado->res_exame == '2')
+                                <option value="{{$resultado->res_exame}}">Falciparum</option>
+                            @elseif($resultado->res_exame == '3')
+                                <option value="{{$resultado->res_exame}}">F+Fg</option>
+                            @elseif($resultado->res_exame == '4')
+                                <option value="{{$resultado->res_exame}}">Vivax</option>
+                            @elseif($resultado->res_exame == '5')
+                                <option value="{{$resultado->res_exame}}">F+V</option>
+                            @elseif($resultado->res_exame == '6')
+                                <option value="{{$resultado->res_exame}}">V+Fg</option>
+                            @elseif($resultado->res_exame == '7')
+                                <option value="{{$resultado->res_exame}}">Fg</option>
+                            @endif  
+                        @endforeach
+                    </select>
+                </form>
+            </div>
+
+
+
 
 
             <!--Tabela-->
@@ -45,10 +75,12 @@
                     <table>
                         <thead>
                             <tr>
-                                <th style="width:100px">COD NOTIF.</th>
+                                <th style="width:80px">COD NOTIF.</th>
                                 <th>NOME</th>
-                                <th style="width:130px">DATA NASC.</th>
-                                <th style="width:130px">DATA NOTIF.</th>
+                                <th style="width:120px">DATA NASC.</th>
+                                <th style="width:120px">DATA NOTIF.</th>
+                                <th style="width:120px">INÍCIO SINTOMA</th>
+                                <th style="width:120px">INÍCIO TRATA.</th>
                                 <!--<th>UNIDADE NOTIFIC.</th>-->
                                 <th style="width:200px">TIPO EXAME</th>
                                 <th style="width:130px">RESULTADO</th>
@@ -67,12 +99,34 @@
                                 @foreach($positivos as $positivo)
                                     <tr>
                                         <td>{{$positivo->cod_noti}}</td>
-                                        
-                                        <td>{{$positivo->nm_paciente}}</td>
+                                        <td title="Visualizar ficha de notificação"><a href="#">{{$positivo->nm_paciente}}</a></td>
                                        
-                                        <td>{{\Carbon\Carbon::parse($positivo->dt_nasci)->format('d/m/Y')}}</td>
-                                               
-                                        <td>{{\Carbon\Carbon::parse($positivo->dt_noti)->format('d/m/Y')}}</td>
+
+
+                                        @if($positivo->dt_nasci)
+                                            <td>{{\Carbon\Carbon::parse($positivo->dt_nasci)->format('d/m/Y')}}</td>
+                                        @else
+                                            <td>-</td>
+                                        @endif
+                                        
+                                        @if($positivo->dt_noti)
+                                            <td>{{\Carbon\Carbon::parse($positivo->dt_noti)->format('d/m/Y')}}</td>
+                                        @else
+                                            <td>-</td>
+                                        @endif
+                                        
+                                        @if($positivo->dt_sinto)
+                                            <td>{{\Carbon\Carbon::parse($positivo->dt_sinto)->format('d/m/Y')}}</td>    
+                                        @else
+                                            <td>-</td>
+                                        @endif
+                                        
+                                        @if($positivo->dt_trata)
+                                            <td>{{\Carbon\Carbon::parse($positivo->dt_trata)->format('d/m/Y')}}</td>   
+                                        @else
+                                            <td>-</td>
+                                        @endif
+                                        
 
 
                                         @if($positivo->tp_exame == '1')
