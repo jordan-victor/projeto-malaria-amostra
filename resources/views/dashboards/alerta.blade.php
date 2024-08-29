@@ -31,7 +31,7 @@
             <!--Filtros tabela-->
             <div class="filtros_res d-flex gap-4">
                 <!--filtro pelo nome-->
-                <form action="{{route('filtrar_caso')}}" method="GET" id="formPesquisarPaciente" name="form_pesquisa_paciente">
+                <form action="{{route('filtrar_nome')}}" method="GET" id="formPesquisarPaciente" name="form_pesquisa_paciente">
                     @csrf
                     <label for="pesquisar">Pesquisar paciente</label>
                     <div class="d-flex gap-1">
@@ -41,11 +41,17 @@
                 </form>
 
                 <!--Filtro por tipo de resultado-->
-                <form action="" method="GET">
+                <form action="{{route('filtrar_res')}}" method="GET" id="formResultados">
                     @csrf
-                    <label for="filtro_resultado">Filtrar Resultado</label>
-                    <select name="filtro_resultado" id="select_resultados" class="form-select" style="width: 250px;" required>
-                        <option>Todos</option>
+                    <label for="select_resultado">Tipo de resultado</label>
+                    <select name="tipo_resultado" id="select_resultados" class="form-select" style="width: 250px;" required>
+                        <option>
+                            @isset($msg_resultado)
+                                {{$msg_resultado}}  
+                            @endisset
+                        </option>
+
+                        <option value="todos">Todos</option>
                         @foreach($resultados as $resultado)
                             @if($resultado->res_exame == '2')
                                 <option value="{{$resultado->res_exame}}">Falciparum</option>
@@ -59,6 +65,14 @@
                                 <option value="{{$resultado->res_exame}}">V+Fg</option>
                             @elseif($resultado->res_exame == '7')
                                 <option value="{{$resultado->res_exame}}">Fg</option>
+                            @elseif($positivo->res_exame == '8')
+                                <option value="{{$resultado->res_exame}}">Malariae</option>
+                            @elseif($positivo->res_exame == '9')
+                                <option value="{{$resultado->res_exame}}">F+M</option>
+                            @elseif($positivo->res_exame == '10')
+                                <option value="{{$resultado->res_exame}}">Ovale</option>
+                            @elseif($positivo->res_exame == '11')
+                                <option value="{{$resultado->res_exame}}">Não Falciparum</option>
                             @endif  
                         @endforeach
                     </select>
@@ -99,9 +113,8 @@
                                 @foreach($positivos as $positivo)
                                     <tr>
                                         <td>{{$positivo->cod_noti}}</td>
-                                        <td title="Visualizar ficha de notificação"><a href="#">{{$positivo->nm_paciente}}</a></td>
+                                        <td title="Visualizar ficha de notificação"><a href="{{$positivo->id_not}}">{{$positivo->nm_paciente}}</a></td>
                                        
-
 
                                         @if($positivo->dt_nasci)
                                             <td>{{\Carbon\Carbon::parse($positivo->dt_nasci)->format('d/m/Y')}}</td>
@@ -160,6 +173,7 @@
                                             <td>Não Falciparum</td>   
                                         @endif
 
+                                        
                                         <td>{{$positivo->nm_local}}</td>
                                     </tr>
                                 @endforeach

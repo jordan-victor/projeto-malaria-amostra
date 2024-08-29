@@ -64,32 +64,46 @@
   <!------------2. SEÇÃO DOS INDICADORES E TOTAIS------------>
   <section class="shadow-none border-0 row d-flex flex-row gap-2 mb-3 bg-transparent">
     <!-- Seção Total de Notificações -->
-    <div class="card subCard p-2 col-2 d-flex flex-column">
+    <div class="card subCard p-2 d-flex flex-column" style="flex:1">
       <h4>Notificações</h4>
 
       <div class="d-flex justify-content-center">
         <div><img src="/img/imgs_localidade/Notificando.png" alt="icone das notificações"></div>
-        <h4>{{$notificacoes}}</h4>
+        <h4 class="tt_res">{{$notificacoes}}</h4>
       </div>
       
       <p class="text-center">LVC:</p>
     </div>
     
 
-    <!-- Seção total de positivos -->
-    <div class="card subCard p-2 col-3 d-flex flex-column">
+    <!-- Seção total de positivos e LVC-->
+    <div class="card subCard p-2 col-4 d-flex flex-column">
       <div class="d-flex justify-content-center">
-        <div><img src="/img/imgs_localidade/positivo.png" alt="icone dos positivos"></div>
-        <div>
-          <h4>Positivos</h4>
-          <h4>{{$positivos}}</h4>
+        <div class="d-flex justify-content-center">
+          <div><img src="/img/imgs_localidade/positivo.png" alt="icone dos positivos"></div>
+          <div>
+            <h4>Positivos</h4>
+            <h4 class="tt_res">{{$positivos}}</h4>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-center">
+          <div><img src="/img/imgs_localidade/positivo.png" alt="icone dos positivos"></div>
+          <div>
+            <h4>LCV positiva</h4>
+            <h4 class="tt_res">{{$tt_lvc}}</h4>
+          </div>
         </div>
       </div>
-    
-      <div class="d-flex justify-content-center gap-5">
-        <p>Falciparum <br><span>LVC:</span> 999</p>
-        <p>F+V <br><span>LVC:</span> 999</p>
-        <p>Vívax<br><span>LVC:</span> 999</p>
+
+
+      <div class="d-flex justify-content-center gap-3 text-center">
+        <p>Falciparum <br> {{$tt_falciparum}} <br><span style="font-size:11px">LVC:</span></p>
+        <p>Vívax<br> {{$tt_vivax}} <br><span style="font-size:11px">LVC:</span></p>
+        <p>F+V <br> {{$tt_fv}} <br><span style="font-size:11px">LVC:</span></p>
+        <p>Malariae <br> {{$tt_malarie}} <br><span style="font-size:11px">LVC:</span></p>
+        <p>Ovale <br> {{$tt_ovale}} <br><span style="font-size:11px">LVC:</span></p>
+        <p>N.Falciparum <br> {{$tt_Nfalciparum}} <br><span style="font-size:11px">LVC:</span></p>
       </div>
     </div>
 
@@ -115,7 +129,7 @@
 
 
     <!-- Seção dos grupos prioritários -->
-    <div class="card p-2 subCard d-flex flex-column col">
+    <div class="card p-2 subCard d-flex flex-column col-4">
       <h4><i class="fa-solid fa-filter fs-5"></i> Grupos Prioritários</h4>
           
       <div class="d-flex justify-content-start flex-column justify-content-center">

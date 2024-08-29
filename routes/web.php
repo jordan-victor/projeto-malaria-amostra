@@ -32,7 +32,8 @@ Route::get('/localidades', [localidadesController::class, 'showLocalidades'])->n
 //Rotas da tela Alerta Malária
 Route::get('/alerta', [alertaController::class, 'showAlerta'])->name('alerta');
 Route::get('/casos', [alertaController::class, 'mostrarCasos'])->name('casos');
-Route::get('/filtrar_caso', [alertaController::class, 'filtrar_caso'])->name('filtrar_caso');
+Route::get('/filtrar_nome', [alertaController::class, 'filtrar_nome'])->name('filtrar_nome');
+Route::get('filtrar_res', [alertaController::class, 'filtrar_res'])->name('filtrar_res');
 
 
 

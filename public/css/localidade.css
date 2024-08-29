@@ -1,6 +1,16 @@
+.dashContainer h4{/*---------------*/
+    color: #1E8065!important;
+    font-weight: bold;   
+}
+.dashContainer .tt_res{
+    color: #2a9e7f;
+    font-weight: 400;
+}
+
 /*FILTRO*/
 .dashContainer .filtros div h4{
     text-align: left;
+    font-weight: bold; 
 }
 .dashContainer i{
     color: #2a9e7f;
@@ -21,6 +31,11 @@
 .dashContainer .filtros p{
     line-height: 5px;
 }
+
+
+
+
+
 /*grupos prioritários*/
 .prioritario{
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.188);
@@ -51,7 +66,7 @@
     background-color: transparent!important;
 }
 .dashContainer .card img{
-    width: 50px;
+    width: 45px;
 }
 .dashContainer .card .subCard{
     display: flex;
