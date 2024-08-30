@@ -88,6 +88,7 @@ class alertaController extends Controller
                                 ->where('id_lvc', '!=', 1)
                                 ->orderBy('id_not', 'desc')
                                 ->paginate(20);
+        $positivos->appends($request->all());//impede que o filtro seja desfeito quando mudamos de página na paginação
 
 
         if(count($positivos) == 0){
@@ -175,6 +176,9 @@ class alertaController extends Controller
                                     ->orderBy('id_not', 'desc')
                                     ->paginate(20);
             }
+
+        $positivos->appends($request->all());//impede que o filtro seja desfeito quando mudamos de página na paginação
+
         return view('dashboards.alerta', ['data'=>$data, 'positivos'=>$positivos, 'resultados'=>$resultados,'msg_resultado'=>$msg_resultado]);
     }
 }

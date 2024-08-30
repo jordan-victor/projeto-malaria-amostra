@@ -7,6 +7,8 @@
     font-weight: 400;
 }
 
+
+
 /*FILTRO*/
 .dashContainer .filtros div h4{
     text-align: left;
@@ -18,6 +20,7 @@
 }
 .dashContainer #limpar{
     cursor: pointer;
+    width: 141px;
 }
 .dashContainer #limpar p{
     color:#2a9e7f;
@@ -200,4 +203,24 @@ table i{
 /*mapa*/
 #mapaLocalidades{
     outline: none;
+}
+
+
+
+
+/*responsividade*/
+@media(max-width:800px){
+    .dashContainer section{
+        background-color: transparent!important;
+        display: flex!important;
+        flex-direction: column!important;
+        flex: 1!important;
+    }
+    .dashContainer section .card{
+        width: 100%!important;
+    }
+    #auto_e_impo{
+        flex-direction: row!important;
+        gap: 20px!important;
+    }
 }

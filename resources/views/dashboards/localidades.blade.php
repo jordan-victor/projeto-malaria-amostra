@@ -10,9 +10,10 @@
 <!----------1. SEÇÃO DE FILTROS------------>
 <main class="dashContainer">
   <section class="filtros card p-2 mb-3 row">
-    <div class="col-1 d-flex-row" id="limpar" title="Limpar filtros">
-      <i class="fa-solid fa-filter"></i>
-      <p>Limpar</p>
+    <div class="row d-flex" title="Limpar filtros">
+        <div id="limpar">
+          <p><i class="fa-solid fa-filter fs-5"></i> Limpar filtros</p>
+        </div>
     </div>
 
     <!-- filtro por Disas -->
@@ -62,7 +63,7 @@
 
 
   <!------------2. SEÇÃO DOS INDICADORES E TOTAIS------------>
-  <section class="shadow-none border-0 row d-flex flex-row gap-2 mb-3 bg-transparent">
+  <section class="shadow-none border-0 row d-flex flex-wrap gap-2 mb-3 bg-transparent">
     <!-- Seção Total de Notificações -->
     <div class="card subCard p-2 d-flex flex-column" style="flex:1">
       <h4>Notificações</h4>
@@ -78,7 +79,7 @@
 
     <!-- Seção total de positivos e LVC-->
     <div class="card subCard p-2 col-4 d-flex flex-column">
-      <div class="d-flex justify-content-center">
+      <div class="d-flex gap-3 justify-content-center">
         <div class="d-flex justify-content-center">
           <div><img src="/img/imgs_localidade/positivo.png" alt="icone dos positivos"></div>
           <div>
@@ -88,7 +89,7 @@
         </div>
 
         <div class="d-flex justify-content-center">
-          <div><img src="/img/imgs_localidade/positivo.png" alt="icone dos positivos"></div>
+          <div><img src="/img/imgs_localidade/laminas.png" alt="icone dos positivos"></div>
           <div>
             <h4>LCV positiva</h4>
             <h4 class="tt_res">{{$tt_lvc}}</h4>
@@ -97,24 +98,24 @@
       </div>
 
 
-      <div class="d-flex justify-content-center gap-3 text-center">
-        <p>Falciparum <br> {{$tt_falciparum}} <br><span style="font-size:11px">LVC:</span></p>
-        <p>Vívax<br> {{$tt_vivax}} <br><span style="font-size:11px">LVC:</span></p>
-        <p>F+V <br> {{$tt_fv}} <br><span style="font-size:11px">LVC:</span></p>
-        <p>Malariae <br> {{$tt_malarie}} <br><span style="font-size:11px">LVC:</span></p>
-        <p>Ovale <br> {{$tt_ovale}} <br><span style="font-size:11px">LVC:</span></p>
-        <p>N.Falciparum <br> {{$tt_Nfalciparum}} <br><span style="font-size:11px">LVC:</span></p>
+      <div class="d-flex justify-content-center justify-content-between text-center">
+        <p>Falciparum <br> {{$tt_falciparum}} <br><span style="font-size:13px">LVC: {{$lvc_falciparum}}</span></p>
+        <p>Vívax<br> {{$tt_vivax}} <br><span style="font-size:13px">LVC: {{$lvc_vivax}}</span></p>
+        <p>F+V <br> {{$tt_fv}} <br><span style="font-size:13px">LVC: {{$lvc_fv}}</span></p>
+        <p>Malariae <br> {{$tt_malarie}} <br><span style="font-size:13px">LVC: {{$lvc_malarie}}</span></p>
+        <p>Ovale <br> {{$tt_ovale}} <br><span style="font-size:13px">LVC: {{$lvc_ovale}}</span></p>
+          <p>N.Falciparum <br> {{$tt_Nfalciparum}} <br><span style="font-size:13px">LVC: {{$lvc_Nfalciparum}}</span></p>
       </div>
     </div>
 
 
     <!-- Seção autóctones e importados -->
-    <div class="card p-2 subCard col-2 d-flex flex-column">
+    <div class="card p-2 subCard col-2 d-flex flex-column justify-content-center gap-1" id="auto_e_impo">
       <div class="d-flex justify-content-center gap-1">
         <div><img src="/img/imgs_localidade/autoctones.png" alt="icone dos autóctones"></div>
         <div>
           <h4>Autóctones</h4>
-          <p>70000 <span>LVC:</span></p>
+          <p>{{$tt_autoctones}} <span>LVC:</span></p>
         </div>
       </div>
       
@@ -122,9 +123,10 @@
         <div><img src="/img/imgs_localidade/importados.png" alt="icone dos importados"></div>
         <div>
           <h4>Importados</h4>
-          <p>70000 <span>LVC:</span></p> 
+          <p>{{$tt_importados}} <span>LVC:</span></p> 
         </div>
       </div>
+      <p>Não informado: {{$tt_nInformado}}</p>
     </div>
 
 
@@ -136,17 +138,17 @@
         <div class="d-flex w-100 justify-content-center justify-content-between">
           <div class="d-flex prioritario" title="Filtrar gestantes">
             <div><img src="/img/imgs_localidade/gestante.png" alt="icone gestante"></div>
-            <p>Gestantes <br> <span>LVC:</span></p>
+            <p>Gestantes <br> <span style="font-size:11px">LVC:</span></p>
           </div>
           
           <div class="d-flex gap-1 prioritario" title="Filtrar idosos">
             <div><img src="/img/imgs_localidade/idosos.png" alt="icone idoso"></div>
-            <p>Idosos <br> <span>LVC:</span></p>
+            <p>Idosos <br> <span style="font-size:11px">LVC:</span></p>
           </div>
           
           <div class="d-flex gap-1 prioritario" title="Filtrar crianças">
             <div><img src="/img/imgs_localidade/criancas.png" alt="icone criança"></div>
-            <p>Crianças <br> <span>LVC:</span></p>
+            <p>Crianças <br> <span style="font-size:11px">LVC:</span></p>
           </div>
         </div>
       </div>

@@ -6,9 +6,6 @@
 
 /*CARDS DA HOME*/
 /*CARD COM A IMAGEM, E OS CARD "MALARIÔMETRO" E "LOCALIDADES"*/
-#home{
-    width: 100vw;
-}
 #home .carta{
     padding: 20px;
     border-radius: 30px;
