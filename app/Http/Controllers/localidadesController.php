@@ -149,6 +149,7 @@ class localidadesController extends Controller
                                 ->count();
 
         //2.15 Total crianças e LVC
+        /*
         $tt_crianca = Outroteste::where('id_lvc', '!=', 1)
                                 ->where('res_exame', '!=', 1)
                                 ->where('id_pacie', '<', 11)
@@ -158,6 +159,8 @@ class localidadesController extends Controller
                                 ->orWhere('id_pacie', '<', 11)
                                 ->where('id_dimea', '=', 'M')
                                 ->count();
+                                */
+
         echo $tt_crianca;
         $lvc_crianca = Outroteste::where('id_lvc', '=', 1)
                                 ->where('res_exame', '!=', 1)
