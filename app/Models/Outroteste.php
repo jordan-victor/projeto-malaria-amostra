@@ -21,6 +21,8 @@ class Outroteste extends Model
         'tp_exame',
         'nm_paciente',
         'dt_nasci',
+        'id_pacie',
+        'id_dimea',
         'id_lvc',
         'loc_infec',
         'dt_sinto',

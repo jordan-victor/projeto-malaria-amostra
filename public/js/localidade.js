@@ -1,3 +1,25 @@
+//SEPARADOR DE MILHAR, TROCAR VÍRGULA POR PONTO
+//Trocar vírgua por ponto
+/*
+function formatarNumeros(){
+    let numeros = document.querySelectorAll("h4")
+    let arr = []
+    numeros.forEach((numero, i)=>{
+        arr.push(numero.innerHTML)
+        numero = arr[i].replace(',','.')
+    }) 
+}
+*/
+
+
+
+
+
+
+
+
+
+
 //FUNÇÃO QUE GERA O GRÁFICO POSITIVIDADE POR SEMANA
 function dashLocalidade(){
     //gerando as 52 labels de semanas
@@ -163,5 +185,6 @@ function mapaLocalidades(){
     const marker4 = L.marker([-3.145377, -60.054570]).addTo(mapa).bindPopup(`Latitude: ${latitude}<br>Longitude: ${longitude}<br> Positivos: ${positivo}`);   
 }
 
+//formatarNumeros()
 dashLocalidade()
 mapaLocalidades()
