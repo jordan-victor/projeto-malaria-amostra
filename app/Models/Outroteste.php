@@ -26,6 +26,8 @@ class Outroteste extends Model
         'id_lvc',
         'loc_infec',
         'dt_sinto',
-        'dt_trata'
+        'dt_trata',
+        'semana',
+        'sem_noti'
     ];
 }

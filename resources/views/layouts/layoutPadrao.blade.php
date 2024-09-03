@@ -19,6 +19,10 @@
     <link rel="stylesheet" href="/css/home.css">
     <link rel="stylesheet" href="/css/localidade.css">
     <link rel="stylesheet" href="/css/alerta.css">
+    <!--BIBLIOTECAS JS PARA GRÁFICOS E MAPAS-->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 </head>
 
 <body id="body">
@@ -57,15 +61,8 @@
                 <p>Gerência de Inteligência de Dados Rural - GEIND-R</p> 
             </div>        
         </div>
-   </footer>  
-   
+   </footer>    
 </body>
-<!--biblioteca charts.js para gráficos e para gerar mapas-->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
- 
-
 <!--scripts js das páginas-->
 <script src="/js/localidade.js"></script>
 <script src="/js/alerta.js"></script>

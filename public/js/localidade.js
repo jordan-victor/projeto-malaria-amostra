@@ -19,7 +19,7 @@ function formatarNumeros(){
 
 
 
-
+/*
 //FUNÇÃO QUE GERA O GRÁFICO POSITIVIDADE POR SEMANA
 function dashLocalidade(){
     //gerando as 52 labels de semanas
@@ -188,3 +188,4 @@ function mapaLocalidades(){
 //formatarNumeros()
 dashLocalidade()
 mapaLocalidades()
+*/

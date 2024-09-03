@@ -7,10 +7,19 @@ use App\Models\Outroteste;
 
 class localidadesController extends Controller
 {
+    //VARIÁVEL GLOBAL, listar tipos de exame
+    protected $tp_exames;
+    public function __construct(){
+        $this->tp_exames = Outroteste::select('tp_exame')
+                                    ->distinct()->get();                                 
+    }
+
+
     public function showLocalidades(){
         date_default_timezone_set('America/Manaus');
         $data = date('Y');
         //--------------------1. SEÇÃO 1(FILTROS)--------------------
+       
 
 
 
@@ -21,7 +30,8 @@ class localidadesController extends Controller
 
 
 
-        //----------2. SEÇÃO 2(INDICADORES DE TOTAIS)---------------
+
+        //----------2. SEÇÃO (INDICADORES DE TOTAIS)---------------
         //2.1 Total notificações e lvc
         $notificacoes = Outroteste::count();
         $lvc_notificacoes = Outroteste::where('id_lvc', '=', 1)->count();
@@ -149,38 +159,81 @@ class localidadesController extends Controller
                                 ->count();
 
         //2.15 Total crianças e LVC
-        /*
         $tt_crianca = Outroteste::where('id_lvc', '!=', 1)
                                 ->where('res_exame', '!=', 1)
-                                ->where('id_pacie', '<', 11)
-                                ->where('id_dimea', '=', 'A')
-                                ->orWhere('id_pacie', '<', 30)
-                                ->where('id_dimea', '=', 'D')
-                                ->orWhere('id_pacie', '<', 11)
-                                ->where('id_dimea', '=', 'M')
+                                ->where(function($query) {
+                                    $query->where(function($query) {
+                                        $query->where('id_pacie', '<=', 11)
+                                            ->where('id_dimea', '=', 'A');
+                                    })
+                                    ->orWhere(function($query) {
+                                        $query->where('id_pacie', '<=', 30)
+                                            ->where('id_dimea', '=', 'D');
+                                    })
+                                    ->orWhere(function($query) {
+                                        $query->where('id_pacie', '<=', 11)
+                                            ->where('id_dimea', '=', 'M');
+                                    });
+                                })
                                 ->count();
-                                */
-
-        echo $tt_crianca;
+        
         $lvc_crianca = Outroteste::where('id_lvc', '=', 1)
                                 ->where('res_exame', '!=', 1)
-                                ->where('id_pacie', '<', 11)
-                                ->where('id_dimea', '=', 'A')
-                                ->orWhere('id_pacie', '<', 30)
-                                ->where('id_dimea', '=', 'D')
-                                ->orWhere('id_pacie', '<', 11)
-                                ->where('id_dimea', '', 'M')
+                                ->where(function($query) {
+                                    $query->where(function($query) {
+                                        $query->where('id_pacie', '<=', 11)
+                                            ->where('id_dimea', '=', 'A');
+                                    })
+                                    ->orWhere(function($query) {
+                                        $query->where('id_pacie', '<=', 30)
+                                            ->where('id_dimea', '=', 'D');
+                                    })
+                                    ->orWhere(function($query) {
+                                        $query->where('id_pacie', '<=', 11)
+                                            ->where('id_dimea', '=', 'M');
+                                    });
+                                })
                                 ->count();
-                                
+
+
+
+
+
+
+
+
 
 
         //----------SEÇÃO 3(MAPAS, TABELAS E GRÁFICOS)-----------
-        //-----------------Teste, apagar depois----------------------
-        $teste = [1,2,3,4];
-        //-----------------------------------------------------------
+        //Total de notificações de cada semana
+        $semanas = Outroteste::select('semana')
+                            ->distinct()
+                            ->get();
+        
+        $tt_semanas = [];
+
+        foreach($semanas as $indice=>$semana){
+            $registro = Outroteste::where('semana', '=', $indice+1)//usando o indice de cada elemeto do array para comparar e filtrar a semana
+                                    ->where('res_exame', '!=', 1)
+                                    ->where('id_lvc', '!=', 1)
+                                    ->count();
+                                    
+            array_push($tt_semanas, $registro);
+        }
+
+        $tt_semanas_string = implode(',', $tt_semanas);//Convertendo o array de totais de semanas em string para depois ser usado no chars.js
+        //Positivos por localidade, ano atual
+
+        //Positivos por localidade, ano passado
+
+        //Positivos por localidade, ano retrasado
+       
         return view('dashboards.localidades', [
+            //filtros
+            'tp_exames'=>$this->tp_exames,
+
+            //indicadores dos totais
             'data'=>$data,
-            'teste'=>$teste,
             'notificacoes'=>$notificacoes,
             'lvc_notificacoes'=>$lvc_notificacoes,
             'positivos'=>$positivos,
@@ -205,7 +258,12 @@ class localidadesController extends Controller
             'tt_gestante'=>$tt_gestante,
             'lvc_gestante'=>$lvc_gestante,
             'tt_idoso'=>$tt_idoso,
-            'lvc_idoso'=>$lvc_idoso
+            'lvc_idoso'=>$lvc_idoso,
+            'tt_crianca'=>$tt_crianca,
+            'lvc_crianca'=>$lvc_crianca,
+
+            //Gráfico positividade por semana
+            'tt_semanas_string'=>$tt_semanas_string
            ]
         );
     }

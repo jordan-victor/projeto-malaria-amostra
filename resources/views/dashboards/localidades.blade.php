@@ -51,7 +51,16 @@
      <div class="col">
       <h4>Tipo de Exame (coleta)</h4>
       <select name="" id="" class="form-select">
-        <option value="">Selecione o tipo</option>
+        <option>Selecione o tipo</option>
+        @foreach($tp_exames as $tp_exame)
+          @if($tp_exame->tp_exame == '1')
+            <option value="{{$tp_exame->tp_exame}}">Gota espessa/Esfregaço</option>
+          @elseif($tp_exame->tp_exame == '2')
+            <option value="{{$tp_exame->tp_exame}}">Teste rápido</option>
+          @elseif($tp_exame->tp_exame == '3')
+            <option value="{{$tp_exame->tp_exame}}">Técnicas moleculares</option>
+          @endif
+        @endforeach
       </select>
      </div>
   </section>
@@ -132,7 +141,17 @@
           </div> 
         </div>
       </div>
-      <p>Não informado: {{$tt_nInformado}}</p>
+
+      <div class="d-flex justify-content-center gap-1">
+        <div><img src="/img/imgs_localidade/nao-informado.png" alt="icone dos importados" style="width:50px!important"></div>
+        <div>
+          <h4>Não informado</h4>
+          <div class="d-flex justify-content-center align-items-center">
+            <div style="line-height:15px">{{number_format($tt_nInformado, 0, '', '.')}}</div>
+          </div> 
+        </div>
+      </div>
+     
     </div>
 
 
@@ -154,7 +173,7 @@
           
           <div class="d-flex gap-1 prioritario" title="Filtrar crianças">
             <div><img src="/img/imgs_localidade/criancas.png" alt="icone criança"></div>
-            <p>Crianças <br> <span style="font-size:13px">LVC:</span></p>
+            <p>Crianças <br> {{$tt_crianca}} <br><span style="font-size:13px">LVC: {{$lvc_crianca}}</span></p>
           </div>
         </div>
       </div>
@@ -392,19 +411,142 @@
 
 
 
+
+
+
+
+
+
+<!--------------------FUNÇÕES JS---------------------------->
 <script>
-  /*Apenas um teste, apagar depois*/
-  let array = []
+  //FUNÇÃO QUE GERA O GRÁFICO POSITIVIDADE POR SEMANA
+  function dashLocalidade(){
+      //gerando as 52 labels de semanas
+      let semanas = []
+      let i = 0
+      while(i<52){
+          i++
+          semanas.push(i)
+      }
 
-  @foreach($teste as $i=>$t)
-    let elemento{{$i}} = {{$i}}
-    array.push(elemento{{$i}})
-  @endforeach
+      //teste com dados falsos, apagar depois
+      let datas = []
+      let datas2 = []
+      let datas3 = []
 
-  
-  array.forEach((element, i) => {
-    console.log(i)
-  });
-  /*---------------------------*/
+      let cont = 0
+      let data = 1000
+      let data2 = 2100
+      let data3 = 1600
+
+      while(cont<52){
+          cont++
+
+          data = data + 300
+          data2 = data2 + 150
+          data3 = data3 + 124
+
+          if(data > 7000){
+              data = 3400
+          }
+          if(data2 > 5600){
+              data2 = 3100
+          }
+          if(data3 > 6200){
+              data3 = 2400
+          }
+
+          datas.push(data)
+          datas2.push(data2)
+          datas3.push(data3)
+      }
+      //---------------------------------------------
+
+
+      //gerando o gráfico
+      var ctxPie = document.getElementById('positivos').getContext('2d');
+      var pieChart = new Chart(ctxPie, {
+          type: 'line',
+          data: {
+              labels: semanas,
+
+              //Configurações dos dados
+              datasets: [
+                  {
+                      label: 'positivos 2024',
+                      data: {{'['.$tt_semanas_string.']'}},//Total de Positivos de cada semana
+                      backgroundColor: [
+                        '#DC3545',
+                          
+                      ],
+                      borderColor: [
+                        '#DC3545',
+                      ],
+                      borderWidth: 1
+                  },
+              ],
+          },
+
+
+
+          //ESTILIZAÇÃO GERAL DO GRÁFICO
+          options: {
+              plugins: {
+                  title: {
+                      display: true,
+                      text: 'Positividade por semana',
+                      color: '#2a9e7f',
+                      font: {
+                          size: 21,
+                          family:'arial',
+                      },
+                      padding: {
+                          top: 10,
+                          bottom: 30
+                      },
+                  }
+              },
+              scales: {
+                  x: {
+                      grid: {
+                          display: false, // Remove as linhas verticais de grade
+                      },
+                  },
+                  y: {
+                      beginAtZero: false
+                  }
+              }
+          }
+      });
+  }
+
+
+
+
+
+
+
+
+
+  //FUNÇÃO PARA GERAR O MAPA DE LOCALIDADES
+  function mapaLocalidades(){ 
+      // Inicialize o mapa e defina a visualização inicial
+      const mapa = L.map('mapaLocalidades').setView([-3.1190275, -60.0217314], 11); // Coordenadas de Manaus
+
+      // Adicione uma camada de mapa (Tile Layer)
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors'
+      }).addTo(mapa);
+
+      // Adicione marcadores (pontos) no mapa
+      let latitude = "-3.145377"
+      let longitude = "-60.054570"
+      let positivo = 20
+      
+      const marker4 = L.marker([latitude, longitude]).addTo(mapa).bindPopup(`Latitude: ${latitude}<br>Longitude: ${longitude}<br> Positivos: ${positivo}`);   
+  }
+
+  dashLocalidade()
+  mapaLocalidades()
 </script>
 @endsection
