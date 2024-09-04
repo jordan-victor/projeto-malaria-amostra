@@ -429,39 +429,6 @@
           semanas.push(i)
       }
 
-      //teste com dados falsos, apagar depois
-      let datas = []
-      let datas2 = []
-      let datas3 = []
-
-      let cont = 0
-      let data = 1000
-      let data2 = 2100
-      let data3 = 1600
-
-      while(cont<52){
-          cont++
-
-          data = data + 300
-          data2 = data2 + 150
-          data3 = data3 + 124
-
-          if(data > 7000){
-              data = 3400
-          }
-          if(data2 > 5600){
-              data2 = 3100
-          }
-          if(data3 > 6200){
-              data3 = 2400
-          }
-
-          datas.push(data)
-          datas2.push(data2)
-          datas3.push(data3)
-      }
-      //---------------------------------------------
-
 
       //gerando o gráfico
       var ctxPie = document.getElementById('positivos').getContext('2d');
@@ -538,12 +505,16 @@
       attribution: '© OpenStreetMap contributors'
       }).addTo(mapa);
 
-      // Adicione marcadores (pontos) no mapa
-      let latitude = "-3.145377"
-      let longitude = "-60.054570"
-      let positivo = 20
-      
-      const marker4 = L.marker([latitude, longitude]).addTo(mapa).bindPopup(`Latitude: ${latitude}<br>Longitude: ${longitude}<br> Positivos: ${positivo}`);   
+      @foreach($positivos_localidade as $indice=>$localidade)
+        let filtroMapa{{$indice}} = `
+          <form action="/detalhes_localidade" method="GET">
+              <input type="hidden" name="{{$localidade->id_mun_loc}}">
+              <button type="submit" class="btn_mapa" title="Clicar para visualizar detalhes">{{$localidade->nm_local}}</button>
+          </form>
+        `;
+
+        const marker{{$indice}} =  L.marker([{{$localidade->latitude}}, {{$localidade->longitude}}]).addTo(mapa).bindPopup(`Latitude: {{$localidade->latitude}}<br>Longitude: {{$localidade->longitude}}<br> Positivos: total <br>${filtroMapa{{$indice}}}`);
+      @endforeach
   }
 
   dashLocalidade()

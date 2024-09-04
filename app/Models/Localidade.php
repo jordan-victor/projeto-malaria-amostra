@@ -16,6 +16,8 @@ class Localidade extends Model
     protected $fillable = [
         'cod_local',
         'nm_local',
-        'mun_ibge'
+        'mun_ibge',
+        'latitude',
+        'longitude'
     ];
 }

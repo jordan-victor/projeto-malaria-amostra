@@ -227,7 +227,31 @@ class localidadesController extends Controller
         //Positivos por localidade, ano passado
 
         //Positivos por localidade, ano retrasado
+
+        //Mapa positivos por localidade
+        $positivos_localidade = DB::table('outroteste as ot')
+                                    ->select('ot.id_not', 'local.nm_local', 'local.latitude', 'local.longitude', 'id_lvc', 'res_exame', 'id_mun_loc')
+                                    ->Leftjoin('localidades as local', function($join) {
+                                        $join->on('ot.mun_infec', '=', 'local.mun_ibge')
+                                            ->on('ot.loc_infec', '=', 'local.cod_local');
+                                    })
+                                    ->where('res_exame', '!=', 1)
+                                    ->where('id_lvc', '!=', 1)
+                                    //->where('mun_infec', '=', 130260)//Só de Manaus
+                                    ->get();
        
+        //Total positivos de cada ponto no mapa
+        $tt_positivos_ponto = [];
+
+        foreach($positivos_localidade as $positivo_localidade){
+            //pegar total de cada ponto
+           $teste = "teste";
+           array_push($tt_positivos_ponto, $teste);
+        }
+             
+        echo count($tt_positivos_ponto);
+
+
         return view('dashboards.localidades', [
             //filtros
             'tp_exames'=>$this->tp_exames,
@@ -262,8 +286,9 @@ class localidadesController extends Controller
             'tt_crianca'=>$tt_crianca,
             'lvc_crianca'=>$lvc_crianca,
 
-            //Gráfico positividade por semana
-            'tt_semanas_string'=>$tt_semanas_string
+            //Gráficos, mapas e tabelas
+            'tt_semanas_string'=>$tt_semanas_string,
+            'positivos_localidade'=>$positivos_localidade
            ]
         );
     }
