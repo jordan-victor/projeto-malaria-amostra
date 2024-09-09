@@ -5,6 +5,17 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Outroteste;
 
+
+class Total{
+    public $latitude;
+    public $longitude;
+    
+    public function __construct($latitude, $longitude){
+        $this->latitude = $latitude;
+        $this->longitude = $longitude;
+    }
+}
+
 class localidadesController extends Controller
 {
     //VARIÁVEL GLOBAL, listar tipos de exame
@@ -221,16 +232,36 @@ class localidadesController extends Controller
             array_push($tt_semanas, $registro);
         }
 
-        $tt_semanas_string = implode(',', $tt_semanas);//Convertendo o array de totais de semanas em string para depois ser usado no chars.js
         //Positivos por localidade, ano atual
+        $tt_semanas_string = implode(',', $tt_semanas);//Convertendo o array de totais de semanas em string para depois ser usado no chars.js
+        
 
-        //Positivos por localidade, ano passado
+        //Positivos ano 2022
+        $positivos2022 = DB::table('posit_ano_anterior')->select('ano_2022')->get();
+        $totais_2022 = [];
 
-        //Positivos por localidade, ano retrasado
+        foreach($positivos2022 as $positivo2022){
+            array_push($totais_2022, $positivo2022->ano_2022); 
+        }
+        
+        $array_tt_2022 = implode(',', $totais_2022);
+
+         //Positivos ano 2023
+         $positivos2023 = DB::table('posit_ano_anterior')->select('ano_2023')->get();
+         $totais_2023 = [];
+ 
+         foreach($positivos2023 as $positivo2023){
+             array_push($totais_2023, $positivo2023->ano_2023); 
+         }
+         
+         $array_tt_2023 = implode(',', $totais_2023);
+ 
+
+
 
         //Mapa positivos por localidade
         $positivos_localidade = DB::table('outroteste as ot')
-                                    ->select('ot.id_not', 'local.nm_local', 'local.latitude', 'local.longitude', 'id_lvc', 'res_exame', 'id_mun_loc')
+                                    ->select('ot.id_not', 'local.nm_local', 'local.latitude', 'local.longitude', 'id_lvc', 'res_exame', 'id_mun_loc',  'loc_infec')
                                     ->Leftjoin('localidades as local', function($join) {
                                         $join->on('ot.mun_infec', '=', 'local.mun_ibge')
                                             ->on('ot.loc_infec', '=', 'local.cod_local');
@@ -240,17 +271,17 @@ class localidadesController extends Controller
                                     //->where('mun_infec', '=', 130260)//Só de Manaus
                                     ->get();
        
+
         //Total positivos de cada ponto no mapa
         $tt_positivos_ponto = [];
 
-        foreach($positivos_localidade as $positivo_localidade){
-            //pegar total de cada ponto
-           $teste = "teste";
-           array_push($tt_positivos_ponto, $teste);
+        foreach($positivos_localidade as $indice=>$positivo_localidade){
+            $novoTotal = $positivo_localidade->loc_infec;
+            array_push($tt_positivos_ponto, $novoTotal);
         }
-             
-        echo count($tt_positivos_ponto);
-
+    
+        $listaTotais =  implode(',', $tt_positivos_ponto);
+       
 
         return view('dashboards.localidades', [
             //filtros
@@ -288,7 +319,11 @@ class localidadesController extends Controller
 
             //Gráficos, mapas e tabelas
             'tt_semanas_string'=>$tt_semanas_string,
-            'positivos_localidade'=>$positivos_localidade
+            'positivos_localidade'=>$positivos_localidade,
+            'tt_positivos_ponto'=>$tt_positivos_ponto,
+            'listaTotais'=>$listaTotais,
+            'array_tt_2022'=>$array_tt_2022,
+            'array_tt_2023'=>$array_tt_2023
            ]
         );
     }

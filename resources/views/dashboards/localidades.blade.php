@@ -429,6 +429,10 @@
           semanas.push(i)
       }
 
+      let tt_2024 = {{'['.$tt_semanas_string.']'}}
+      let tt_2023 = {{'['.$array_tt_2023.']'}}
+      let tt_2022 = {{'['.$array_tt_2022.']'}}
+
 
       //gerando o gráfico
       var ctxPie = document.getElementById('positivos').getContext('2d');
@@ -440,16 +444,42 @@
               //Configurações dos dados
               datasets: [
                   {
-                      label: 'positivos 2024',
-                      data: {{'['.$tt_semanas_string.']'}},//Total de Positivos de cada semana
-                      backgroundColor: [
-                        '#DC3545',
-                          
-                      ],
-                      borderColor: [
-                        '#DC3545',
-                      ],
-                      borderWidth: 1
+                    label: 'positivos 2024',
+                    data: {{'['.$tt_semanas_string.']'}},//Total de Positivos de cada semana
+                    backgroundColor: [
+                      '#186751',
+                        
+                    ],
+                    borderColor: [
+                      '#186751',
+                    ],
+                    borderWidth: 1
+                  },
+
+                  {
+                    label: 'positivos 2023',
+                    data: {{'['.$array_tt_2023.']'}},//Total de Positivos de cada semana
+                    backgroundColor: [
+                      '#44c692',
+                        
+                    ],
+                    borderColor: [
+                      '#44c692',
+                    ],
+                    borderWidth: 1
+                  },
+
+                  {
+                    label: 'positivos 2022',
+                    data: {{'['.$array_tt_2022.']'}},//Total de Positivos de cada semana
+                    backgroundColor: [
+                      '#abffb3',
+                        
+                    ],
+                    borderColor: [
+                      '#abffb3',
+                    ],
+                    borderWidth: 1
                   },
               ],
           },
@@ -458,7 +488,21 @@
 
           //ESTILIZAÇÃO GERAL DO GRÁFICO
           options: {
+              responsive: true,
+
               plugins: {
+                tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                // Calculando o total para a semana correspondente
+                                const index = context.dataIndex;
+                                return `Positivos 2024: ${tt_2024[index]}\n
+                                Positivos 2023: ${tt_2023[index]}\n
+                                Positivos 2022: ${tt_2022[index]}`;
+                            }
+                        }
+                    },
+
                   title: {
                       display: true,
                       text: 'Positividade por semana',
@@ -473,6 +517,7 @@
                       },
                   }
               },
+              
               scales: {
                   x: {
                       grid: {
@@ -497,15 +542,19 @@
 
   //FUNÇÃO PARA GERAR O MAPA DE LOCALIDADES
   function mapaLocalidades(){ 
+      let listaTotais = {{'['.$listaTotais.']'}}//transformando a lista de totais de todos os positivos passada pelo controler em um array
+     
       // Inicialize o mapa e defina a visualização inicial
       const mapa = L.map('mapaLocalidades').setView([-3.1190275, -60.0217314], 11); // Coordenadas de Manaus
-
+    
       // Adicione uma camada de mapa (Tile Layer)
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '© OpenStreetMap contributors'
       }).addTo(mapa);
 
       @foreach($positivos_localidade as $indice=>$localidade)
+        let total{{$indice}} = listaTotais.filter(total=>total == '{{$localidade->loc_infec}}').length
+
         let filtroMapa{{$indice}} = `
           <form action="/detalhes_localidade" method="GET">
               <input type="hidden" name="{{$localidade->id_mun_loc}}">
@@ -513,7 +562,7 @@
           </form>
         `;
 
-        const marker{{$indice}} =  L.marker([{{$localidade->latitude}}, {{$localidade->longitude}}]).addTo(mapa).bindPopup(`Latitude: {{$localidade->latitude}}<br>Longitude: {{$localidade->longitude}}<br> Positivos: total <br>${filtroMapa{{$indice}}}`);
+        const marker{{$indice}} =  L.marker([{{$localidade->latitude}}, {{$localidade->longitude}}]).addTo(mapa).bindPopup(`Latitude: {{$localidade->latitude}}<br>Longitude: {{$localidade->longitude}}<br> Positivos: ${total{{$indice}}} <br>${filtroMapa{{$indice}}}`);
       @endforeach
   }
 
