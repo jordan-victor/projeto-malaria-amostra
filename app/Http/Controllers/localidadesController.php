@@ -234,7 +234,7 @@ class localidadesController extends Controller
 
         //Positivos por localidade, ano atual
         $tt_semanas_string = implode(',', $tt_semanas);//Convertendo o array de totais de semanas em string para depois ser usado no chars.js
-        
+    
 
         //Positivos ano 2022
         $positivos2022 = DB::table('posit_ano_anterior')->select('ano_2022')->get();
@@ -257,21 +257,49 @@ class localidadesController extends Controller
          }
          
          $array_tt_2023 = implode(',', $totais_2023);
- 
+
+    
 
 
-         //Array de variações entre o ano atual e o ano passado
-         $array_variacoes = [];
-         foreach($semanas as $i=>$semana){
-            $valor = (($tt_semanas[$i]/$totais_2023[$i])-1)*100;
-            $valor = number_format($valor, 2)."%";
-            array_push($array_variacoes, $valor);
-         }
 
-         $variacoes = implode(',', $array_variacoes);
 
 
          
+         //TABELAS CÓDIGOS MUNICÍPIO IBGE, TOTAIS LVC
+         $cods_munIBGE = DB::table('outroteste as ot')
+                            ->Leftjoin('localidades as local', function($join) {
+                                $join->on('ot.mun_infec', '=', 'local.mun_ibge')
+                                    ->on('ot.loc_infec', '=', 'local.cod_local');
+                            })
+                            ->where('res_exame', '!=', 1)
+                            ->where('id_lvc', '!=', 1)
+                            ->get();
+
+        $qtd_positivos = [];
+        foreach($cods_munIBGE as $cod_munIBGE){
+            $qtd_positivo = $cod_munIBGE->mun_ibge.$cod_munIBGE->loc_infec;
+            array_push($qtd_positivos, $qtd_positivo);
+        }
+        
+        
+        $totais_lvc = DB::table('outroteste as ot')
+        ->Leftjoin('localidades as local', function($join) {
+            $join->on('ot.mun_infec', '=', 'local.mun_ibge')
+                ->on('ot.loc_infec', '=', 'local.cod_local');
+        })
+        ->where('res_exame', '!=', 1)
+        ->get();
+
+        $id_lvcs = [];
+        foreach($totais_lvc as $total_lvc){
+            $id_lvc = $total_lvc->id_lvc;
+            array_push($id_lvcs, $id_lvc);
+        }
+        
+
+
+
+
         //Mapa positivos por localidade
         $positivos_localidade = DB::table('outroteste as ot')
                                     ->select('ot.id_not', 'local.nm_local', 'local.latitude', 'local.longitude', 'id_lvc', 'res_exame', 'id_mun_loc',  'loc_infec')
@@ -330,14 +358,18 @@ class localidadesController extends Controller
             'tt_crianca'=>$tt_crianca,
             'lvc_crianca'=>$lvc_crianca,
 
-            //Gráficos, mapas e tabelas
+            //tabelas
+            'cods_munIBGE'=>$cods_munIBGE,
+            'qtd_positivos'=>$qtd_positivos,
+            'id_lvcs'=>$id_lvcs,
+
+            //Gráficos e mapas
             'tt_semanas_string'=>$tt_semanas_string,
             'positivos_localidade'=>$positivos_localidade,
             'tt_positivos_ponto'=>$tt_positivos_ponto,
             'listaTotais'=>$listaTotais,
             'array_tt_2022'=>$array_tt_2022,
             'array_tt_2023'=>$array_tt_2023,
-            'variacoes'=>$variacoes
            ]
         );
     }

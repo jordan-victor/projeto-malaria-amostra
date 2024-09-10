@@ -203,16 +203,17 @@
       <div id="infecHeader">
         <h4>Locais Prováveis de infecção</h4>
         <p><i class="fa-solid fa-square text-danger"></i> Autóctones</p>
-        <button>Exibir local em mapa</button>
       </div>
       
       <div class="row p-3">
         <table class="tabela">
           <thead>
             <tr>
-              <th>Cod+MunIBGE</th>
-              <th>Nome local</th>
+              <th style="width:70px">Município</th>
+              <th style="width:50px">Cod.</th>
+              <th style="width:230px">Localidade</th>
               <th>Positivo <i class="fa-solid fa-sort-down fs-6"></i></th>
+              <th>LVC <i class="fa-solid fa-sort-down fs-6"></i></th>
               <th>Idoso <i class="fa-solid fa-sort-down fs-6"></i></th>
               <th>Criança <i class="fa-solid fa-sort-down fs-6"></i></th>
               <th>Gestante <i class="fa-solid fa-sort-down fs-6"></i></th>
@@ -222,70 +223,38 @@
 
           
           <tbody>
-            <tr>
-              <td>hefuhfuh</td>
-              <td>efeefeff rggrg ssfvrrfve</td>
-              <td>feffeef</td>
-              <td>feeffef</td>
-              <td>fefeeef</td>
-              <td>effeefeef</td>
-              <td>fefeeef</td>
-            </tr>
-            <tr>
-              <td>hefuhfuh</td>
-              <td>efeefvf rrrggrrreffefe</td>
-              <td>feffeef</td>
-              <td>feeffef</td>
-              <td>fefeeef</td>
-              <td>effeefeef</td>
-              <td>fefeeef</td>
-            </tr>
-            <tr>
-              <td>hefuhfuh</td>
-              <td>efeeferrvrr fvrrrvrvrrffefe</td>
-              <td>feffeef</td>
-              <td>feeffef</td>
-              <td>fefeeef</td>
-              <td>effeefeef</td>
-              <td>fefeeef</td>
-            </tr>
-            <tr>
-              <td>hefuhfuh</td>
-              <td>efeeferrrrv fvvfvfvfvffefe</td>
-              <td>feffeef</td>
-              <td>feeffef</td>
-              <td>fefeeef</td>
-              <td>effeefeef</td>
-              <td>fefeeef</td>
-            </tr>
-            <tr>
-              <td>hefuhfuh</td>
-              <td>efeeffvvfvffvv fvfvvfeffefe</td>
-              <td>feffeef</td>
-              <td>feeffef</td>
-              <td>fefeeef</td>
-              <td>effeefeef</td>
-              <td>fefeeef</td>
-            </tr>
-            <tr>
-              <td>hefuhfuh</td>
-              <td>efeeffvfvvfv ffvfeffefe</td>
-              <td>feffeef</td>
-              <td>feeffef</td>
-              <td>fefeeef</td>
-              <td>effeefeef</td>
-              <td>fefeeef</td>
-            </tr>
-            <tr>
-              <td>hefuhfuh</td>
-              <td>efeeffvfvfv fv rrrrgrgeffefe</td>
-              <td>feffeef</td>
-              <td>feeffef</td>
-              <td>fefeeef</td>
-              <td>effeefeef</td>
-              <td>fefeeef</td>
-            </tr>
-            <tr>
+            @foreach($cods_munIBGE as $cod_munIBGE)
+              <tr>
+                <td style="width:70px">{{$cod_munIBGE->mun_ibge}}</td>
+                <td style="width:50px">{{$cod_munIBGE->loc_infec}}</td>
+                <td style="width:230px">{{$cod_munIBGE->nm_local}}</td>
+
+                <td>
+                  @php
+                    $arrayValores = $qtd_positivos;
+                    $valoresContados = array_count_values($arrayValores);
+                    $valorComparar = $cod_munIBGE->mun_ibge.$cod_munIBGE->loc_infec;
+                    $qtd_positivo = $valoresContados[$valorComparar] ?? 0;
+                  @endphp
+                  {{$qtd_positivo}}
+                </td>
+
+                <td>
+                  @php
+                    $arrayLvcs = $id_lvcs;
+                    $valoresContados = array_count_values($arrayLvcs);
+                    $valorComparar = $cod_munIBGE->id_lvc;
+                    $qtd_lvc = $valoresContados[$valorComparar = 1] ?? 0;
+                  @endphp
+                  {{$qtd_lvc}}
+                </td>
+
+                <td>eec</td>
+                <td>ececc</td>
+                <td>cecec</td>
+                <td>eceec</td>
+              </tr>
+            @endforeach
           </tbody>
 
           <tfoot>
@@ -293,6 +262,7 @@
               <th>Total</th>
               <th></th>
               <th>4.046</th>
+              <th>69</th>
               <th>349</th>
               <th>503</th>
               <th>41</th>
@@ -428,16 +398,7 @@
       let tt_2023 = {{'['.$array_tt_2023.']'}}
       let tt_2022 = {{'['.$array_tt_2022.']'}}
 
-      //Variações
-      let arrayVariacoes = []
-
-      tt_2024.forEach((valor, indice)=>{
-        let variacao = (((tt_2024[indice]/tt_2023[indice])-1)*100).toFixed(2) + "%"
-        arrayVariacoes.push(variacao)
-      })
       
-      console.log(arrayVariacoes)
-
       
 
       //gerando o gráfico
@@ -472,14 +433,6 @@
                     borderColor: '#186751',
                     borderWidth: 1
                   },
-
-                  {
-                    label: '',
-                    data: `${arrayVariacoes}`,
-                    backgroundColor: 'transparent',
-                    borderColor: 'transparent',
-                    borderWidth: 0
-                  }
               ],
           },
 
@@ -491,27 +444,27 @@
 
               interaction: {
                 mode: 'index', // Mostra todos os datasets no mesmo ponto (índice)
-                intersect: false // Garante que funcione ao passar sobre qualquer linha
+                intersect: false
               },
 
               plugins: {
-                /*
                 tooltip: {
-                        callbacks: {
-                          label: function(context) {
-                              // Calculando o total para a semana correspondente
-                              const index = context.dataIndex;
-                              const datasetIndex = context.datasetIndex;
+                      callbacks: {
+                        afterBody: function(tooltipItems) {
+                          // Obtenha os valores de cada ano (2022, 2023, 2024) com base nos datasets
+                          const index = tooltipItems[0].dataIndex; // Pega o índice da semana correspondente
+                          const valor2023 = tooltipItems[0].chart.data.datasets[1].data[index];
+                          const valor2024 = tooltipItems[0].chart.data.datasets[2].data[index];
 
-                              const totais_2022 = `Positivos 2022: ${tt_2022[index]}`
-                              const totais_2023 = `Positivos 2023: ${tt_2023[index]}`
-                              const totais_2024 = `Positivos 2024: ${tt_2024[index]}`
-                             
-                              return [totais_2022, totais_2023, totais_2024]
-                          },
+                          // Calcule a variação entre os anos
+                          const variacao = (((valor2024/valor2023)-1)*100).toFixed(2) + "%"
+
+                          // Retorna a string de comentário com a diferença
+                          return [` `,'Variação 2023-2024: ' + variacao];
                         }
+                      }
                     },
-                    */
+                    
                   title: {
                       display: true,
                       text: 'Positividade por semana',
@@ -575,7 +528,13 @@
       @endforeach
   }
 
+
+
+
+  
+
   dashLocalidade()
   mapaLocalidades()
+  
 </script>
 @endsection
