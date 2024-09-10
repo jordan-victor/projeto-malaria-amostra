@@ -222,7 +222,7 @@ class localidadesController extends Controller
                             ->get();
         
         $tt_semanas = [];
-
+        
         foreach($semanas as $indice=>$semana){
             $registro = Outroteste::where('semana', '=', $indice+1)//usando o indice de cada elemeto do array para comparar e filtrar a semana
                                     ->where('res_exame', '!=', 1)
@@ -246,6 +246,8 @@ class localidadesController extends Controller
         
         $array_tt_2022 = implode(',', $totais_2022);
 
+
+
          //Positivos ano 2023
          $positivos2023 = DB::table('posit_ano_anterior')->select('ano_2023')->get();
          $totais_2023 = [];
@@ -258,7 +260,18 @@ class localidadesController extends Controller
  
 
 
+         //Array de variações entre o ano atual e o ano passado
+         $array_variacoes = [];
+         foreach($semanas as $i=>$semana){
+            $valor = (($tt_semanas[$i]/$totais_2023[$i])-1)*100;
+            $valor = number_format($valor, 2)."%";
+            array_push($array_variacoes, $valor);
+         }
 
+         $variacoes = implode(',', $array_variacoes);
+
+
+         
         //Mapa positivos por localidade
         $positivos_localidade = DB::table('outroteste as ot')
                                     ->select('ot.id_not', 'local.nm_local', 'local.latitude', 'local.longitude', 'id_lvc', 'res_exame', 'id_mun_loc',  'loc_infec')
@@ -323,7 +336,8 @@ class localidadesController extends Controller
             'tt_positivos_ponto'=>$tt_positivos_ponto,
             'listaTotais'=>$listaTotais,
             'array_tt_2022'=>$array_tt_2022,
-            'array_tt_2023'=>$array_tt_2023
+            'array_tt_2023'=>$array_tt_2023,
+            'variacoes'=>$variacoes
            ]
         );
     }

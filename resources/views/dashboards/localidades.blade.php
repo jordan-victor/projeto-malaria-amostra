@@ -412,11 +412,6 @@
 
 
 
-
-
-
-
-
 <!--------------------FUNÇÕES JS---------------------------->
 <script>
   //FUNÇÃO QUE GERA O GRÁFICO POSITIVIDADE POR SEMANA
@@ -433,6 +428,17 @@
       let tt_2023 = {{'['.$array_tt_2023.']'}}
       let tt_2022 = {{'['.$array_tt_2022.']'}}
 
+      //Variações
+      let arrayVariacoes = []
+
+      tt_2024.forEach((valor, indice)=>{
+        let variacao = (((tt_2024[indice]/tt_2023[indice])-1)*100).toFixed(2) + "%"
+        arrayVariacoes.push(variacao)
+      })
+      
+      console.log(arrayVariacoes)
+
+      
 
       //gerando o gráfico
       var ctxPie = document.getElementById('positivos').getContext('2d');
@@ -444,43 +450,36 @@
               //Configurações dos dados
               datasets: [
                   {
-                    label: 'positivos 2024',
-                    data: {{'['.$tt_semanas_string.']'}},//Total de Positivos de cada semana
-                    backgroundColor: [
-                      '#186751',
-                        
-                    ],
-                    borderColor: [
-                      '#186751',
-                    ],
+                    label: 'positivos 2022',
+                    data: {{'['.$array_tt_2022.']'}},//Total de Positivos de cada semana
+                    backgroundColor: '#abffb3',
+                    borderColor: '#abffb3',
                     borderWidth: 1
                   },
 
                   {
                     label: 'positivos 2023',
                     data: {{'['.$array_tt_2023.']'}},//Total de Positivos de cada semana
-                    backgroundColor: [
-                      '#44c692',
-                        
-                    ],
-                    borderColor: [
-                      '#44c692',
-                    ],
+                    backgroundColor: '#44c692',
+                    borderColor: '#44c692',
+                    borderWidth: 1
+                  },
+                  
+                 {
+                    label: 'positivos 2024',
+                    data: {{'['.$tt_semanas_string.']'}},//Total de Positivos de cada semana
+                    backgroundColor: '#186751',
+                    borderColor: '#186751',
                     borderWidth: 1
                   },
 
                   {
-                    label: 'positivos 2022',
-                    data: {{'['.$array_tt_2022.']'}},//Total de Positivos de cada semana
-                    backgroundColor: [
-                      '#abffb3',
-                        
-                    ],
-                    borderColor: [
-                      '#abffb3',
-                    ],
-                    borderWidth: 1
-                  },
+                    label: '',
+                    data: `${arrayVariacoes}`,
+                    backgroundColor: 'transparent',
+                    borderColor: 'transparent',
+                    borderWidth: 0
+                  }
               ],
           },
 
@@ -490,19 +489,29 @@
           options: {
               responsive: true,
 
+              interaction: {
+                mode: 'index', // Mostra todos os datasets no mesmo ponto (índice)
+                intersect: false // Garante que funcione ao passar sobre qualquer linha
+              },
+
               plugins: {
+                /*
                 tooltip: {
                         callbacks: {
-                            label: function(context) {
-                                // Calculando o total para a semana correspondente
-                                const index = context.dataIndex;
-                                return `Positivos 2024: ${tt_2024[index]}\n
-                                Positivos 2023: ${tt_2023[index]}\n
-                                Positivos 2022: ${tt_2022[index]}`;
-                            }
+                          label: function(context) {
+                              // Calculando o total para a semana correspondente
+                              const index = context.dataIndex;
+                              const datasetIndex = context.datasetIndex;
+
+                              const totais_2022 = `Positivos 2022: ${tt_2022[index]}`
+                              const totais_2023 = `Positivos 2023: ${tt_2023[index]}`
+                              const totais_2024 = `Positivos 2024: ${tt_2024[index]}`
+                             
+                              return [totais_2022, totais_2023, totais_2024]
+                          },
                         }
                     },
-
+                    */
                   title: {
                       display: true,
                       text: 'Positividade por semana',
