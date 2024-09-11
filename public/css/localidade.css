@@ -103,25 +103,17 @@
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    gap: 75px;
 }
 #infecHeader p{
     font-size: 12px;
+    display: inline;
+    line-height: 25px;
 }
 #infecHeader i{
     font-size: 12px;
 }
-#infecHeader button{
-    height: 25px;
-    font-size: 12px;
-    padding-left: 4px;
-    padding-right: 4px;
-    border: none;
-    background-color: #2a9e7f;
-    cursor: pointer;
-    color: white;
-    border-radius: 15px;
-}
+
 
 /*Corpo da tabela*/
 table{

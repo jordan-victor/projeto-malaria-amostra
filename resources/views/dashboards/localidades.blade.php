@@ -213,7 +213,7 @@
               <th style="width:50px">Cod.</th>
               <th style="width:230px">Localidade</th>
               <th>Positivo <i class="fa-solid fa-sort-down fs-6"></i></th>
-              <th>LVC <i class="fa-solid fa-sort-down fs-6"></i></th>
+              <th style="width:50px">LVC <i class="fa-solid fa-sort-down fs-6"></i></th>
               <th>Idoso <i class="fa-solid fa-sort-down fs-6"></i></th>
               <th>Criança <i class="fa-solid fa-sort-down fs-6"></i></th>
               <th>Gestante <i class="fa-solid fa-sort-down fs-6"></i></th>
@@ -229,7 +229,7 @@
                 <td style="width:50px">{{$cod_munIBGE->loc_infec}}</td>
                 <td style="width:230px">{{$cod_munIBGE->nm_local}}</td>
 
-                <td>
+                <td class="text-danger">
                   @php
                     $arrayValores = $qtd_positivos;
                     $valoresContados = array_count_values($arrayValores);
@@ -239,19 +239,70 @@
                   {{$qtd_positivo}}
                 </td>
 
-                <td>
+                <td style="width:50px">
                   @php
                     $arrayLvcs = $id_lvcs;
                     $valoresContados = array_count_values($arrayLvcs);
-                    $valorComparar = $cod_munIBGE->id_lvc;
-                    $qtd_lvc = $valoresContados[$valorComparar = 1] ?? 0;
+                    $valorComparar = '1'.$cod_munIBGE->mun_ibge.$cod_munIBGE->loc_infec;
+                    $qtd_lvc = $valoresContados[$valorComparar] ?? 0;
                   @endphp
                   {{$qtd_lvc}}
                 </td>
 
-                <td>eec</td>
-                <td>ececc</td>
-                <td>cecec</td>
+
+                <td>
+                  @php
+                    $array_idosos = $totais_idosos;
+                    $comp_ibge = $cod_munIBGE->mun_ibge;
+                    $comp_local = $cod_munIBGE->loc_infec;
+                    $comp_dma = $cod_munIBGE->id_dimea;
+
+                    $total_idoso = array_filter($array_idosos, function($array_idosos) use($comp_ibge, $comp_local, $comp_dma){
+                      return $array_idosos['cod_municipio'] == $comp_ibge   &&   $array_idosos['cod_localidade'] == $comp_local   &&   $array_idosos['idade'] >= 60   &&   $array_idosos['dia_mes_ano'] == 'A';
+                    });
+
+                    echo count($total_idoso);
+                  @endphp
+                </td>
+
+
+                <td>
+                  @php
+                    $array_idosos = $totais_idosos;
+                    $comp_ibge = $cod_munIBGE->mun_ibge;
+                    $comp_local = $cod_munIBGE->loc_infec;
+                    $comp_dma = ['D', 'M', 'A'];
+
+                    $total_idoso = array_filter($array_idosos, function($array_idosos) use($comp_ibge, $comp_local, $comp_dma){
+
+                      if($array_idosos['cod_municipio'] == $comp_ibge && $array_idosos['cod_localidade'] == $comp_local){
+                        if(($array_idosos['idade'] <= 11 && $array_idosos['dia_mes_ano'] === 'A') || ($array_idosos['idade'] <= 30 && $array_idosos['dia_mes_ano'] === 'D') || ($array_idosos['idade'] <= 11 && $array_idosos['dia_mes_ano'] === 'M')){
+                          return true;
+                        }
+                      }
+                      return false;
+                    });
+
+                    echo count($total_idoso);
+                  @endphp
+                </td>
+
+
+                <td>
+                  @php
+                    $array_gestantes = $totais_gestantes;
+                    $comp_ibge = $cod_munIBGE->mun_ibge;
+                    $comp_local = $cod_munIBGE->loc_infec;
+
+                    $total_gestante = array_filter($array_gestantes, function($array_gestantes) use($comp_ibge, $comp_local){
+                      return $array_gestantes['cod_municipio'] == $comp_ibge  &&  $array_gestantes['cod_localidade'] == $comp_local  &&  $array_gestantes['gestante'] == '1' ||  $array_gestantes['gestante'] == '2' ||  $array_gestantes['gestante'] == '3' ||  $array_gestantes['gestante'] == '4';
+                    });
+
+                    echo count($total_gestante);
+                  @endphp
+                </td>
+
+
                 <td>eceec</td>
               </tr>
             @endforeach
@@ -259,14 +310,15 @@
 
           <tfoot>
             <tr>
-              <th>Total</th>
-              <th></th>
-              <th>4.046</th>
-              <th>69</th>
-              <th>349</th>
-              <th>503</th>
-              <th>41</th>
-              <th>99</th>
+              <th style="width:75px">Total</th>
+              <th style="width:50px"></th>
+              <th style="width:230px"></th>
+              <th>{{number_format($positivos, 0, '', '.')}}</th>
+              <th style="width:50px">{{number_format($tt_lvc, 0, '', '.')}}</th>
+              <th>{{number_format($tt_idoso, 0, '', '.')}}</th>
+              <th>{{number_format($tt_crianca, 0, '', '.')}}</th>
+              <th>{{number_format($tt_gestante, 0, '', '.')}}</th>
+              <th>{{number_format($tt_falciparum, 0, '', '.')}}</th>
             </tr>
           </tfoot>
         </table>
@@ -274,7 +326,7 @@
     </div>
 
 
-    <!-- Seção Unidades Notificantes -->
+    <!-- Tabela Unidades Notificantes -->
     <div class="card col-5 p-2 d-flex flex-column">
       <h4 style="text-align:left">Unidades Notificantes</h4>
       <p style="font-size:12px; line-height:0px">(Origem das notificações positivas por localidade)</p> 

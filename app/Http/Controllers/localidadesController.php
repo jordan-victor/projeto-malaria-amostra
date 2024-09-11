@@ -215,7 +215,7 @@ class localidadesController extends Controller
 
 
 
-        //----------SEÇÃO 3(MAPAS, TABELAS E GRÁFICOS)-----------
+        //-------------------------SEÇÃO 3(GRÁFICO POSITIVOS POR SEMANA)---------------------------
         //Total de notificações de cada semana
         $semanas = Outroteste::select('semana')
                             ->distinct()
@@ -265,41 +265,84 @@ class localidadesController extends Controller
 
 
          
-         //TABELAS CÓDIGOS MUNICÍPIO IBGE, TOTAIS LVC
-         $cods_munIBGE = DB::table('outroteste as ot')
-                            ->Leftjoin('localidades as local', function($join) {
-                                $join->on('ot.mun_infec', '=', 'local.mun_ibge')
-                                    ->on('ot.loc_infec', '=', 'local.cod_local');
-                            })
-                            ->where('res_exame', '!=', 1)
-                            ->where('id_lvc', '!=', 1)
-                            ->get();
 
+
+        //----------------SEÇÃO 4(TABELAS LOCAIS DE INFECÇÃO E UNIDADES NOTIFICANTES)-----------
+        //Total positivos
+        $cods_munIBGE = DB::table('outroteste as ot')
+                        ->Leftjoin('localidades as local', function($join) {
+                            $join->on('ot.mun_infec', '=', 'local.mun_ibge')
+                                ->on('ot.loc_infec', '=', 'local.cod_local');
+                        })
+                        ->where('res_exame', '!=', 1)
+                        ->where('id_lvc', '!=', 1)->get();
+                        
+
+        //criando Array códigos dos municípios e da localidade
         $qtd_positivos = [];
         foreach($cods_munIBGE as $cod_munIBGE){
             $qtd_positivo = $cod_munIBGE->mun_ibge.$cod_munIBGE->loc_infec;
             array_push($qtd_positivos, $qtd_positivo);
         }
         
-        
+
+        //criando Array LVC
         $totais_lvc = DB::table('outroteste as ot')
         ->Leftjoin('localidades as local', function($join) {
             $join->on('ot.mun_infec', '=', 'local.mun_ibge')
                 ->on('ot.loc_infec', '=', 'local.cod_local');
         })
-        ->where('res_exame', '!=', 1)
-        ->get();
-
+        ->where('res_exame', '!=', 1)->get();
+        
         $id_lvcs = [];
         foreach($totais_lvc as $total_lvc){
-            $id_lvc = $total_lvc->id_lvc;
+            $id_lvc = $total_lvc->id_lvc.$total_lvc->mun_ibge.$total_lvc->loc_infec; //, $total_lvc->mun_ibge, $total_lvc->mun_ibge
             array_push($id_lvcs, $id_lvc);
         }
+
+
+        //criando Array idosos(serve também para crianças)
+        $totais_idosos = [];
+
+        foreach($cods_munIBGE as $cod_munIBGE){
+            $total_idoso = [
+                "cod_municipio"=>$cod_munIBGE->mun_ibge,
+                "cod_localidade"=>$cod_munIBGE->loc_infec,
+                "idade"=>$cod_munIBGE->id_pacie,
+                "dia_mes_ano"=>$cod_munIBGE->id_dimea
+            ];
+
+            array_push($totais_idosos, $total_idoso);
+        }
+        
+
+        //criando Array gestantes
+        $totais_gestantes = [];
+
+        foreach($cods_munIBGE as $cod_munIBGE){
+            $total_gestante = [
+                "cod_municipio"=>$cod_munIBGE->mun_ibge,
+                "cod_localidade"=>$cod_munIBGE->loc_infec,
+                "gestante"=>$cod_munIBGE->gestante
+            ];
+
+            array_push($totais_gestantes, $total_gestante);
+        }
+
+       
+
+
         
 
 
 
 
+
+
+
+
+        
+        //-----------------SEÇÃO 5 (MAPA POSITIVOS POR LOCALIDADE)--------------------
         //Mapa positivos por localidade
         $positivos_localidade = DB::table('outroteste as ot')
                                     ->select('ot.id_not', 'local.nm_local', 'local.latitude', 'local.longitude', 'id_lvc', 'res_exame', 'id_mun_loc',  'loc_infec')
@@ -362,6 +405,8 @@ class localidadesController extends Controller
             'cods_munIBGE'=>$cods_munIBGE,
             'qtd_positivos'=>$qtd_positivos,
             'id_lvcs'=>$id_lvcs,
+            'totais_idosos'=>$totais_idosos,
+            'totais_gestantes'=>$totais_gestantes,
 
             //Gráficos e mapas
             'tt_semanas_string'=>$tt_semanas_string,
