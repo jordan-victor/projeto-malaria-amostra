@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Outroteste;
+use App\Models\Unidade;
 
 
 class Total{
@@ -215,6 +216,11 @@ class localidadesController extends Controller
 
 
 
+
+
+
+
+
         //-------------------------SEÇÃO 3(GRÁFICO POSITIVOS POR SEMANA)---------------------------
         //Total de notificações de cada semana
         $semanas = Outroteste::select('semana')
@@ -267,10 +273,16 @@ class localidadesController extends Controller
          
 
 
+
+
+
+
+
         //----------------SEÇÃO 4(TABELAS LOCAIS DE INFECÇÃO E UNIDADES NOTIFICANTES)-----------
-        //Total positivos
+        //4.1 TABELA LOCAIS PROVÁVEIS DE INFECÇÃO
+        //4.1.1 Total positivos
         $cods_munIBGE = DB::table('outroteste as ot')
-                        ->Leftjoin('localidades as local', function($join) {
+                        ->leftjoin('localidades as local', function($join) {
                             $join->on('ot.mun_infec', '=', 'local.mun_ibge')
                                 ->on('ot.loc_infec', '=', 'local.cod_local');
                         })
@@ -278,7 +290,7 @@ class localidadesController extends Controller
                         ->where('id_lvc', '!=', 1)->get();
                         
 
-        //criando Array códigos dos municípios e da localidade
+        //4.1.2 criando Array códigos dos municípios e da localidade
         $qtd_positivos = [];
         foreach($cods_munIBGE as $cod_munIBGE){
             $qtd_positivo = $cod_munIBGE->mun_ibge.$cod_munIBGE->loc_infec;
@@ -286,7 +298,7 @@ class localidadesController extends Controller
         }
         
 
-        //criando Array LVC
+        //4.1.3 criando Array LVC
         $totais_lvc = DB::table('outroteste as ot')
         ->Leftjoin('localidades as local', function($join) {
             $join->on('ot.mun_infec', '=', 'local.mun_ibge')
@@ -301,7 +313,7 @@ class localidadesController extends Controller
         }
 
 
-        //criando Array idosos(serve também para crianças)
+        //4.1.4 criando Array idosos(serve também para crianças)
         $totais_idosos = [];
 
         foreach($cods_munIBGE as $cod_munIBGE){
@@ -316,7 +328,7 @@ class localidadesController extends Controller
         }
         
 
-        //criando Array gestantes
+        //4.1.5 criando Array gestantes
         $totais_gestantes = [];
 
         foreach($cods_munIBGE as $cod_munIBGE){
@@ -329,7 +341,26 @@ class localidadesController extends Controller
             array_push($totais_gestantes, $total_gestante);
         }
 
+
+        //4.1.6 criando Array res_exame para Falciparum
+        $totais_falciparum = [];
+
+        foreach($cods_munIBGE as $cod_munIBGE){
+            $total_falciparum = [
+                "cod_municipio"=>$cod_munIBGE->mun_ibge,
+                "cod_localidade"=>$cod_munIBGE->loc_infec,
+                "res_exame"=>$cod_munIBGE->res_exame
+            ];
+
+            array_push($totais_falciparum, $total_falciparum);
+        }
+
+
+
+
+        //4.2 TABELA UNIDADES NOTIFICANTES
        
+      
 
 
         
@@ -407,6 +438,7 @@ class localidadesController extends Controller
             'id_lvcs'=>$id_lvcs,
             'totais_idosos'=>$totais_idosos,
             'totais_gestantes'=>$totais_gestantes,
+            'totais_falciparum'=>$totais_falciparum,
 
             //Gráficos e mapas
             'tt_semanas_string'=>$tt_semanas_string,

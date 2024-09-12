@@ -211,11 +211,11 @@
             <tr>
               <th style="width:70px">Município</th>
               <th style="width:50px">Cod.</th>
-              <th style="width:230px">Localidade</th>
+              <th style="width:260px">Localidade</th>
               <th>Positivo <i class="fa-solid fa-sort-down fs-6"></i></th>
               <th style="width:50px">LVC <i class="fa-solid fa-sort-down fs-6"></i></th>
-              <th>Idoso <i class="fa-solid fa-sort-down fs-6"></i></th>
-              <th>Criança <i class="fa-solid fa-sort-down fs-6"></i></th>
+              <th style="width:50px">Idoso <i class="fa-solid fa-sort-down fs-6"></i></th>
+              <th style="width:60px">Criança <i class="fa-solid fa-sort-down fs-6"></i></th>
               <th>Gestante <i class="fa-solid fa-sort-down fs-6"></i></th>
               <th>Falcip. <i class="fa-solid fa-sort-down fs-6"></i></th>
             </tr>
@@ -227,7 +227,7 @@
               <tr>
                 <td style="width:70px">{{$cod_munIBGE->mun_ibge}}</td>
                 <td style="width:50px">{{$cod_munIBGE->loc_infec}}</td>
-                <td style="width:230px">{{$cod_munIBGE->nm_local}}</td>
+                <td style="width:260px">{{$cod_munIBGE->nm_local}}</td>
 
                 <td class="text-danger">
                   @php
@@ -250,7 +250,7 @@
                 </td>
 
 
-                <td>
+                <td style="width:50px">
                   @php
                     $array_idosos = $totais_idosos;
                     $comp_ibge = $cod_munIBGE->mun_ibge;
@@ -266,7 +266,7 @@
                 </td>
 
 
-                <td>
+                <td style="width:60px">
                   @php
                     $array_idosos = $totais_idosos;
                     $comp_ibge = $cod_munIBGE->mun_ibge;
@@ -295,7 +295,7 @@
                     $comp_local = $cod_munIBGE->loc_infec;
 
                     $total_gestante = array_filter($array_gestantes, function($array_gestantes) use($comp_ibge, $comp_local){
-                      return $array_gestantes['cod_municipio'] == $comp_ibge  &&  $array_gestantes['cod_localidade'] == $comp_local  &&  $array_gestantes['gestante'] == '1' ||  $array_gestantes['gestante'] == '2' ||  $array_gestantes['gestante'] == '3' ||  $array_gestantes['gestante'] == '4';
+                      return $array_gestantes['cod_municipio'] == $comp_ibge  &&  $array_gestantes['cod_localidade'] == $comp_local  &&  in_array($array_gestantes['gestante'], [1, 2, 3, 4]);
                     });
 
                     echo count($total_gestante);
@@ -303,7 +303,19 @@
                 </td>
 
 
-                <td>eceec</td>
+                <td>
+                  @php
+                    $array_resExame = $totais_falciparum;
+                    $comp_ibge = $cod_munIBGE->mun_ibge;
+                    $comp_local = $cod_munIBGE->loc_infec;
+
+                    $total_falciparum = array_filter($array_resExame, function($array_resExame) use($comp_ibge, $comp_local){
+                      return $array_resExame['cod_municipio'] == $comp_ibge  &&  $array_resExame['cod_localidade'] == $comp_local  &&  in_array($array_resExame['res_exame'], [2, 3, 7, 9]); 
+                    });
+
+                    echo count($total_falciparum);
+                  @endphp
+                </td>
               </tr>
             @endforeach
           </tbody>
@@ -312,11 +324,11 @@
             <tr>
               <th style="width:75px">Total</th>
               <th style="width:50px"></th>
-              <th style="width:230px"></th>
+              <th style="width:260px"></th>
               <th>{{number_format($positivos, 0, '', '.')}}</th>
               <th style="width:50px">{{number_format($tt_lvc, 0, '', '.')}}</th>
-              <th>{{number_format($tt_idoso, 0, '', '.')}}</th>
-              <th>{{number_format($tt_crianca, 0, '', '.')}}</th>
+              <th style="width:50px">{{number_format($tt_idoso, 0, '', '.')}}</th>
+              <th style="width:60px">{{number_format($tt_crianca, 0, '', '.')}}</th>
               <th>{{number_format($tt_gestante, 0, '', '.')}}</th>
               <th>{{number_format($tt_falciparum, 0, '', '.')}}</th>
             </tr>
@@ -324,6 +336,7 @@
         </table>
       </div>
     </div>
+
 
 
     <!-- Tabela Unidades Notificantes -->
