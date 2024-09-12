@@ -15,6 +15,7 @@ class Outroteste extends Model
     protected $primaryKey = 'id_not';
 
     protected $fillable = [
+        'unid_noti',
         'cod_noti',
         'res_exame',
         'dt_noti',

@@ -300,7 +300,7 @@ class localidadesController extends Controller
 
         //4.1.3 criando Array LVC
         $totais_lvc = DB::table('outroteste as ot')
-        ->Leftjoin('localidades as local', function($join) {
+        ->leftjoin('localidades as local', function($join) {
             $join->on('ot.mun_infec', '=', 'local.mun_ibge')
                 ->on('ot.loc_infec', '=', 'local.cod_local');
         })
@@ -308,7 +308,7 @@ class localidadesController extends Controller
         
         $id_lvcs = [];
         foreach($totais_lvc as $total_lvc){
-            $id_lvc = $total_lvc->id_lvc.$total_lvc->mun_ibge.$total_lvc->loc_infec; //, $total_lvc->mun_ibge, $total_lvc->mun_ibge
+            $id_lvc = $total_lvc->id_lvc.$total_lvc->mun_ibge.$total_lvc->loc_infec;
             array_push($id_lvcs, $id_lvc);
         }
 
@@ -359,8 +359,35 @@ class localidadesController extends Controller
 
 
         //4.2 TABELA UNIDADES NOTIFICANTES
-       
-      
+        //Unidades notificantes
+        $unidades_notif = Unidade::all();//leftJoin('outroteste', 'unidade_notificante.cod_unid', '=', 'outroteste.unid_noti')->get();
+
+        //Notificações
+        $notifics = DB::table('outroteste as ot')
+                        ->leftjoin('localidades as local', function($join) {
+                            $join->on('ot.mun_infec', '=', 'local.mun_ibge')
+                                ->on('ot.loc_infec', '=', 'local.cod_local');
+                        })
+                        ->where('res_exame', '!=', 1)
+                        ->where('id_lvc', '!=', 1)
+                        ->get();
+
+        //criando array unid_noti (array dos códigos de unidades notificantes)
+        $array_unidadeNoti = [];
+
+        foreach($notifics as $notific){
+            $cod_notificacao = ["codigo"=>$notific->unid_noti, "res_exame"=>$notific->res_exame];
+            array_push($array_unidadeNoti, $cod_notificacao);
+        }
+        
+        /*
+        foreach($notifics as $notific){
+            $cod_notificacao = $notific->unid_noti;
+            array_push($array_unidadeNoti, $cod_notificacao);
+        }
+        */
+    
+                          
 
 
         
@@ -439,6 +466,8 @@ class localidadesController extends Controller
             'totais_idosos'=>$totais_idosos,
             'totais_gestantes'=>$totais_gestantes,
             'totais_falciparum'=>$totais_falciparum,
+            'unidades_notif'=>$unidades_notif,
+            'array_unidadeNoti'=>$array_unidadeNoti,
 
             //Gráficos e mapas
             'tt_semanas_string'=>$tt_semanas_string,

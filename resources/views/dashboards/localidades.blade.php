@@ -348,8 +348,8 @@
         <table class="tabela">
           <thead>
             <tr>
-              <th style="">Cod+MunIBGE</th>
-              <th style="">Nome</th>
+              <th style="width:100px">Cod+MunIBGE</th>
+              <th style="width:270px">Nome</th>
               <th>Positivos <i class="fa-solid fa-sort-down fs-6"></i></th>
               <th>Falcip. <i class="fa-solid fa-sort-down fs-6"></i></th>
             </tr>
@@ -357,68 +357,47 @@
 
           
           <tbody>
-            <tr>
-              <td>hefuhfuh</td>
-              <td>efeefeff rggrg ssfvrrfve</td>
-              <td>feffeef</td>
-              <td>feeffef</td>
-            </tr>
-            <tr>
-              <td>hefuhfuh</td>
-              <td>efeefvf rrrggrrreffefe</td>
-              <td>feffeef</td>
-              <td>feeffef</td>
-            </tr>
-            <tr>
-              <td>hefuhfuh</td>
-              <td>efeeferrvrr fvrrrvrvrrffefe</td>
-              <td>feffeef</td>
-              <td>feeffef</td>
-            </tr>
-            <tr>
-              <td>hefuhfuh</td>
-              <td>efeeferrrrv fvvfvfvfvffefe</td>
-              <td>feffeef</td>
-              <td>feeffef</td>
-            </tr>
-            <tr>
-              <td>hefuhfuh</td>
-              <td>efeeffvvfvffvv fvfvvfeffefe</td>
-              <td>feffeef</td>
-              <td>feeffef</td>
-            </tr>
-            <tr>
-              <td>hefuhfuh</td>
-              <td>efeeffvfvvfv ffvfeffefe</td>
-              <td>feffeef</td>
-              <td>feeffef</td>
-            </tr>
-            <tr>
-              <td>hefuhfuh</td>
-              <td>efeeffvfvfv fv rrrrgrgeffefe</td>
-              <td>feffeef</td>
-              <td>feeffef</td>
-            </tr>
-            <tr>
-              <td>hefuhfuh</td>
-              <td>efeeffvfvfv fv rrrrgrgeffefe</td>
-              <td>feffeef</td>
-              <td>feeffef</td>
-            </tr>
-            <tr>
-              <td>hefuhfuh</td>
-              <td>efeeffvfvfv fv rrrrgrgeffefe</td>
-              <td>feffeef</td>
-              <td>feeffef</td>
-            </tr>
+            @foreach($unidades_notif as $unidade_notif)
+              <tr>
+                <td style="width:100px">{{$unidade_notif->cod_unid}} - {{$unidade_notif->mun_ibge}}</td>
+                <td style="width:270px">{{$unidade_notif->nm_unid}}</td>
+
+                <td>
+                  @php
+                    $codigos = $array_unidadeNoti;
+                    $codigo = $unidade_notif->cod_unid;
+
+                    $tt_positivo_unidade = array_filter($codigos, function($codigos) use($codigo){
+                      return in_array($codigos['codigo'], [$codigo]);
+                    });
+
+                    echo count($tt_positivo_unidade);
+                  @endphp
+                </td>
+
+
+                <td>
+                  @php
+                      $codigos = $array_unidadeNoti;
+                      $codigo = $unidade_notif->cod_unid;
+
+                      $tt_positivo_unidade = array_filter($codigos, function($codigos) use($codigo){
+                        return in_array($codigos['codigo'], [$codigo]) && in_array($codigos['res_exame'], [2, 3, 7, 9]);
+                      });
+
+                      echo count($tt_positivo_unidade);
+                    @endphp
+                </td>
+              </tr>
+            @endforeach
           </tbody>
 
           <tfoot>
             <tr>
-              <th>Total</th>
-              <th></th>
-              <th>4.046</th>
-              <th>99</th>
+              <th style="width:100px">Total</th>
+              <th style="width:280px"></th>
+              <th>{{number_format($positivos, 0, '', '.')}}</th>
+              <th>{{number_format($tt_falciparum, 0, '', '.')}}</th>
             </tr>
           </tfoot>
         </table>
