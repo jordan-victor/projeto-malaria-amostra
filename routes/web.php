@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\alertaController;
 use App\Http\Controllers\notificacaoController;
 use App\Http\Controllers\localidadesController;
-
+use App\Http\Controllers\filtros\disaController;
 
 
 
@@ -24,6 +24,7 @@ Route::get('/', function () {
 
 //Rota para abrir a página do dashboard localidade
 Route::get('/localidades', [localidadesController::class, 'showLocalidades'])->name('localidades');
+Route::get('/filtro_disa', [disaController::class, 'filtroDisa'])->name('filtro_disa');
 
 
 

@@ -1,5 +1,6 @@
 <?php
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\filtros;
+use App\Http\Controllers\Controller;//usar esse controller que está dentro da pasta filtros
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -8,17 +9,11 @@ use App\Models\Unidade;
 use App\Models\Distrito;
 
 
-class Total{
-    public $latitude;
-    public $longitude;
-    
-    public function __construct($latitude, $longitude){
-        $this->latitude = $latitude;
-        $this->longitude = $longitude;
-    }
-}
 
-class localidadesController extends Controller
+
+
+
+class disaController extends Controller
 {
     //VARIÁVEL GLOBAL, listar tipos de exame
     protected $tp_exames;
@@ -28,14 +23,17 @@ class localidadesController extends Controller
     }
 
 
-    public function showLocalidades(){
+    public function filtroDisa(Request $request){
         date_default_timezone_set('America/Manaus');
         $data = date('Y');
 
         //--------------------1. SEÇÃO 1(FILTROS)--------------------
         //Tipos de distrito
         $distritos = Distrito::all();
-   
+
+        //*O VALOR DESSE CÓDIGO DO DISTRITO SERÁ USADO EM TODAS CONSUTAS ABAIXO*
+        $cod_distrito = $request->distrito;
+        
 
 
 
@@ -260,15 +258,15 @@ class localidadesController extends Controller
 
 
 
-         //Positivos ano 2023
-         $positivos2023 = DB::table('posit_ano_anterior')->select('ano_2023')->get();
-         $totais_2023 = [];
- 
-         foreach($positivos2023 as $positivo2023){
-             array_push($totais_2023, $positivo2023->ano_2023); 
-         }
-         
-         $array_tt_2023 = implode(',', $totais_2023);
+        //Positivos ano 2023
+        $positivos2023 = DB::table('posit_ano_anterior')->select('ano_2023')->get();
+        $totais_2023 = [];
+
+        foreach($positivos2023 as $positivo2023){
+            array_push($totais_2023, $positivo2023->ano_2023); 
+        }
+        
+        $array_tt_2023 = implode(',', $totais_2023);
 
     
 
@@ -276,7 +274,7 @@ class localidadesController extends Controller
 
 
 
-         
+        
 
 
 
@@ -392,7 +390,7 @@ class localidadesController extends Controller
             array_push($array_unidadeNoti, $cod_notificacao);
         }
     
-                          
+                        
 
 
         
@@ -417,7 +415,7 @@ class localidadesController extends Controller
                                     ->where('id_lvc', '!=', 1)
                                     //->where('mun_infec', '=', 130260)//Só de Manaus
                                     ->get();
-       
+    
 
         //Total positivos de cada ponto no mapa
         $tt_positivos_ponto = [];
@@ -428,7 +426,7 @@ class localidadesController extends Controller
         }
     
         $listaTotais =  implode(',', $tt_positivos_ponto);
-       
+    
 
         return view('dashboards.localidades', [
             //filtros
@@ -482,7 +480,7 @@ class localidadesController extends Controller
             'listaTotais'=>$listaTotais,
             'array_tt_2022'=>$array_tt_2022,
             'array_tt_2023'=>$array_tt_2023,
-           ]
+        ]
         );
     }
 }

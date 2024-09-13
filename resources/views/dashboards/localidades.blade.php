@@ -19,16 +19,15 @@
     <!-- filtro por Disas -->
     <div class="col">
       <h4>Distrito</h4>
-      <select name="" id="" class="form-select">
-        <option value="">Selecione o distrito</option>
-        <option value="">1</option>
-        <option value="">2</option>
-        <option value="">3</option>
-        <option value="">4</option>
-        <option value="">5</option>
-        <option value="">6</option>
-        <option value="">7</option>
-      </select>
+      <form action="{{route('filtro_disa')}}" method="GET" id="form_disa">
+        @csrf
+        <select name="distrito" class="form-select" id="disa_select">
+          <option>Selecione o distrito</option>
+          @foreach($distritos as $distrito)
+            <option value="{{$distrito->cod_disa}}">{{$distrito->nm_disa}}</option>
+          @endforeach
+        </select>
+      </form>  
     </div>
     
     <!-- filtro por unidades -->
@@ -36,14 +35,19 @@
       <h4>Unidade de Saúde</h4>
       <select name="" id="" class="form-select">
         <option value="">Selecione a unidade</option>
+        @foreach($unidades_notif as $unidade_notif)
+          <option value="{{$unidade_notif->cod_unid}}">{{$unidade_notif->nm_unid}}</option>
+        @endforeach
       </select>
     </div>
     
     <!-- filtro se a localidade é fluvial ou terrestre -->
      <div class="col">
-      <h4>Tipo de localidade</h4>
+      <h4>Localidade (DISA rural)</h4>
       <select name="" id="" class="form-select">
-        <option value="">Selecione o tipo</option>
+        <option value="">Selecione o localidade</option>
+        <option value="1">Terrestre</option>
+        <option value="2">Fluvial</option>
       </select>
      </div>
     
@@ -459,7 +463,9 @@
                     data: {{'['.$array_tt_2022.']'}},//Total de Positivos de cada semana
                     backgroundColor: '#abffb3',
                     borderColor: '#abffb3',
-                    borderWidth: 1
+                    borderWidth: 2,
+                    pointRadius: 0,  // Esconder os pontos inicialmente
+                    hoverRadius: 6 
                   },
 
                   {
@@ -467,7 +473,9 @@
                     data: {{'['.$array_tt_2023.']'}},//Total de Positivos de cada semana
                     backgroundColor: '#44c692',
                     borderColor: '#44c692',
-                    borderWidth: 1
+                    borderWidth: 2,
+                    pointRadius: 0,  // Esconder os pontos inicialmente
+                    hoverRadius: 6 
                   },
                   
                  {
@@ -475,7 +483,9 @@
                     data: {{'['.$tt_semanas_string.']'}},//Total de Positivos de cada semana
                     backgroundColor: '#186751',
                     borderColor: '#186751',
-                    borderWidth: 1
+                    borderWidth: 2,
+                    pointRadius: 0,  // Esconder os pontos inicialmente
+                    hoverRadius: 6 
                   },
               ],
           },
@@ -557,6 +567,19 @@
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '© OpenStreetMap contributors'
       }).addTo(mapa);
+      
+
+      var redIcon = L.icon({
+        iconUrl: 'img/imgs_localidade/location.png', // URL da imagem do ícone vermelho
+        shadowUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png', // Sombra do ícone (opcional)
+
+        iconSize:     [23, 39], // Tamanho do ícone
+        shadowSize:   [41, 41], // Tamanho da sombra
+        iconAnchor:   [12, 41], // Ponto de ancoragem do ícone
+        shadowAnchor: [12, 41], // Ponto de ancoragem da sombra
+        popupAnchor:  [1, -34]  // Ponto de ancoragem do popup
+      });
+
 
       @foreach($positivos_localidade as $indice=>$localidade)
         let total{{$indice}} = listaTotais.filter(total=>total == '{{$localidade->loc_infec}}').length
@@ -568,7 +591,7 @@
           </form>
         `;
 
-        const marker{{$indice}} =  L.marker([{{$localidade->latitude}}, {{$localidade->longitude}}]).addTo(mapa).bindPopup(`Latitude: {{$localidade->latitude}}<br>Longitude: {{$localidade->longitude}}<br> Positivos: ${total{{$indice}}} <br>${filtroMapa{{$indice}}}`);
+        const marker{{$indice}} =  L.marker([{{$localidade->latitude}}, {{$localidade->longitude}}], {icon: redIcon}).addTo(mapa).bindPopup(`Latitude: {{$localidade->latitude}}<br>Longitude: {{$localidade->longitude}}<br> Positivos: ${total{{$indice}}} <br>${filtroMapa{{$indice}}}`);
       @endforeach
   }
 

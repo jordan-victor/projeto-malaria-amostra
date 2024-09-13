@@ -18,6 +18,7 @@ class Localidade extends Model
         'nm_local',
         'mun_ibge',
         'latitude',
-        'longitude'
+        'longitude',
+        'cod_tploc'
     ];
 }
