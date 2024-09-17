@@ -34,7 +34,7 @@
                 <form action="{{route('filtrar_nome')}}" method="GET" id="formPesquisarPaciente" name="form_pesquisa_paciente">
                     @csrf
                     <label for="pesquisar">Pesquisar paciente</label>
-                    <div class="d-flex gap-1">
+                    <div class="d-flex flex-row gap-1">
                         <input type="text" name="nome_paciente" id="nome_paciente" class="form-control" placeholder="Nome" required style="width: 250px;">
                         <button type="submit" class="btn" style="width: 100px; box-shadow:none">Pesquisar</button>  
                     </div>  

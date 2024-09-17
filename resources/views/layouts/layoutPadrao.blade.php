@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="/css/home.css">
     <link rel="stylesheet" href="/css/localidade.css">
     <link rel="stylesheet" href="/css/alerta.css">
+    
     <!--BIBLIOTECAS JS PARA GRÁFICOS E MAPAS-->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />

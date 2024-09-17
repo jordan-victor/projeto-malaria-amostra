@@ -103,7 +103,7 @@
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-    gap: 75px;
+    gap: 105px;
 }
 #infecHeader p{
     font-size: 12px;

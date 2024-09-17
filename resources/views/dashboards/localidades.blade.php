@@ -12,7 +12,7 @@
   <section class="filtros card p-2 mb-3 row">
     <div class="row d-flex" title="Limpar filtros">
         <div id="limpar">
-          <p><i class="fa-solid fa-filter fs-5"></i> Limpar filtros</p>
+          <a href="{{route('limpaFiltro')}}" class="text-decoration-none"><p><i class="fa-solid fa-filter fs-5"></i> Limpar filtros</p></a>
         </div>
     </div>
 
@@ -22,7 +22,12 @@
       <form action="{{route('filtro_disa')}}" method="GET" id="form_disa">
         @csrf
         <select name="distrito" class="form-select" id="disa_select">
-          <option>Selecione o distrito</option>
+          <option>
+            @isset($disa)
+              {{$disa->nm_disa}}
+            @endisset
+          </option>
+          
           @foreach($distritos as $distrito)
             <option value="{{$distrito->cod_disa}}">{{$distrito->nm_disa}}</option>
           @endforeach

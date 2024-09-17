@@ -33,7 +33,7 @@ class disaController extends Controller
 
         //*O VALOR DESSE CÓDIGO DO DISTRITO SERÁ USADO EM TODAS CONSUTAS ABAIXO*
         $cod_distrito = $request->distrito;
-        
+        $disa = Distrito::find($cod_distrito);
 
 
 
@@ -49,15 +49,31 @@ class disaController extends Controller
 
         //----------2. SEÇÃO (INDICADORES DE TOTAIS)---------------
         //2.1 Total notificações e lvc
-        $notificacoes = Outroteste::count();
+        $notificacoes =  DB::table('outroteste as ot')
+                            ->join('unidade_notificante as unid', 'ot.unid_noti', '=', 'unid.cod_unid')
+                            ->join('localidades as loc', function ($join) {
+                                $join->on('loc.cod_local', '=', 'unid.cod_local')
+                                    ->on('loc.mun_ibge', '=', 'unid.mun_ibge');
+                            })
+                            ->where('loc.cod_disa','=', $cod_distrito)//APENAS O DISA SELECIONADO (FILTRO)
+                            ->select('ot.unid_noti')
+                            ->count();
+         
+
         $lvc_notificacoes = Outroteste::where('id_lvc', '=', 1)->count();
+                            
 
 
         //2.2 Total positivos
-        $positivos = Outroteste::where('res_exame', '!=', 1)
-                                ->where('id_lvc', '!=', 1)
-                                ->count();
-        
+        $positivos = Outroteste::leftJoin('localidades', function($join) {
+                                $join->on('outroteste.mun_infec', '=', 'localidades.mun_ibge')
+                                        ->on('outroteste.loc_infec', '=', 'localidades.cod_local');
+                                    })
+                                    ->where('cod_disa', '=', $cod_distrito)/**APENAS O DISA SELECIONADO (FILTRO)**/
+                                    ->where('res_exame', '!=', 1)
+                                    ->where('id_lvc', '!=', 1)
+                                    ->count();
+            
         
         //2.3 Total LVC positiva
         $tt_lvc = Outroteste::where('res_exame', '!=', 1)
@@ -432,6 +448,8 @@ class disaController extends Controller
             //filtros
             'tp_exames'=>$this->tp_exames,
             'distritos'=>$distritos,
+            'cod_distrito'=>$cod_distrito,
+            'disa'=>$disa,
 
             //indicadores dos totais
             'data'=>$data,

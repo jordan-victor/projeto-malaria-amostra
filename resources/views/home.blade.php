@@ -30,6 +30,7 @@
                     <img src="/img/home/alerta.png" alt="Alerta Malária" style="width: 160px;">
                 </div>
             </a>
+            
 
             <div class="carta">
                 <img src="/img/home/indicadores.png" alt="Malariômetro Localidades" width="150">
@@ -42,6 +43,12 @@
             <div class="carta">
                 <img src="/img/home/criadouros.png" alt="Criadouros" width="150">
             </div>
+
+            <a href="{{route('ficha-notificacao')}}">
+                <div class="carta">
+                    <img src="/img/home/notificacao.png" alt="Malariômetro Localidades" width="150">
+                </div>
+            </a>
         </section>
     </header>
     

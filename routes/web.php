@@ -26,6 +26,9 @@ Route::get('/', function () {
 Route::get('/localidades', [localidadesController::class, 'showLocalidades'])->name('localidades');
 Route::get('/filtro_disa', [disaController::class, 'filtroDisa'])->name('filtro_disa');
 
+Route::get('/limpaFiltro', function(){
+    return redirect('/localidades'); 
+})->name('limpaFiltro');
 
 
 
@@ -42,3 +45,10 @@ Route::get('filtrar_res', [alertaController::class, 'filtrar_res'])->name('filtr
 
 //Rotas da tela Notificações
 Route::get('/notificacao', [notificacaoController::class, 'showNotificacao'])->name('notificacao');
+
+Route::get('/ficha-notificacao', function(){
+    date_default_timezone_set('America/Manaus');
+    $data = date('Y');
+
+    return view('ficha-notificacao', ['data'=>$data]);
+})->name('ficha-notificacao');
