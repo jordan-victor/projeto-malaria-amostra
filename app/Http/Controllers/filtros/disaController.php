@@ -48,7 +48,19 @@ class disaController extends Controller
 
 
         //----------2. SEÇÃO (INDICADORES DE TOTAIS)---------------
+        $notificacoes = Outroteste::select('res_exame')->count();
+
+        $lvc_notificacoes = Outroteste::select('id_lvc')
+                                        ->where('id_lvc', '=', 1)->count();
+
+
+        //2.2 Total positivos
+        $positivos = Outroteste::select('res_exame', 'id_lvc')
+                                ->where('res_exame', '!=', 1)
+                                ->where('id_lvc', '!=', 1)
+                                ->count();
         //2.1 Total notificações e lvc
+        /*
         $notificacoes =  DB::table('outroteste as ot')
                             ->join('unidade_notificante as unid', 'ot.unid_noti', '=', 'unid.cod_unid')
                             ->join('localidades as loc', function ($join) {
@@ -69,108 +81,129 @@ class disaController extends Controller
                                 $join->on('outroteste.mun_infec', '=', 'localidades.mun_ibge')
                                         ->on('outroteste.loc_infec', '=', 'localidades.cod_local');
                                     })
-                                    ->where('cod_disa', '=', $cod_distrito)/**APENAS O DISA SELECIONADO (FILTRO)**/
+                                    ->where('cod_disa', '=', $cod_distrito)//APENAS O DISA SELECIONADO (FILTRO)
                                     ->where('res_exame', '!=', 1)
                                     ->where('id_lvc', '!=', 1)
+                                    ->select('ot.unid_noti')
                                     ->count();
             
-        
+        */
         //2.3 Total LVC positiva
-        $tt_lvc = Outroteste::where('res_exame', '!=', 1)
+        $tt_lvc = Outroteste::select('res_exame', 'id_lvc')
+                            ->where('res_exame', '!=', 1)
                             ->where('id_lvc', '=', 1)
                             ->count();
 
 
         //2.4 Total Falciparum e LVC
-        $tt_falciparum = Outroteste::where('id_lvc', '!=', 1)
+        $tt_falciparum = Outroteste::select('res_exame', 'id_lvc')
+                                    ->where('id_lvc', '!=', 1)
                                     ->whereIn('res_exame', [2, 3, 7, 9])
                                     ->count();
 
-        $lvc_falciparum =  Outroteste::where('id_lvc', '=', 1)
-                                    ->whereIn('res_exame', [2, 3, 7, 9])
-                                    ->count();
+        $lvc_falciparum =  Outroteste::select('res_exame', 'id_lvc')
+                                        ->where('id_lvc', '=', 1)
+                                        ->whereIn('res_exame', [2, 3, 7, 9])
+                                        ->count();
         
         //2.5 Total F+V e LVC
-        $tt_fv = Outroteste::where('id_lvc', '!=', 1)
+        $tt_fv = Outroteste::select('res_exame', 'id_lvc')
+                            ->where('id_lvc', '!=', 1)
                             ->whereIn('res_exame', [5,6])
                             ->count();
 
-        $lvc_fv = Outroteste::where('id_lvc', '=', 1)
+        $lvc_fv = Outroteste::select('res_exame', 'id_lvc')
+                            ->where('id_lvc', '=', 1)
                             ->whereIn('res_exame', [5,6])
                             ->count();
         
         //2.6 Total Vivax e LVC
-        $tt_vivax = Outroteste::where('id_lvc', '!=', 1)
+        $tt_vivax = Outroteste::select('res_exame', 'id_lvc')
+                                ->where('id_lvc', '!=', 1)
                                 ->where('res_exame', '=', 4)
                                 ->count();
 
-        $lvc_vivax = Outroteste::where('id_lvc', '=', 1)
+        $lvc_vivax = Outroteste::select('res_exame', 'id_lvc')
+                                ->where('id_lvc', '=', 1)
                                 ->where('res_exame', '=', 4)
                                 ->count();
                                     
         //2.7 Total Malariae e LVC
-        $tt_malarie = Outroteste::where('id_lvc', '!=', 1)
+        $tt_malarie = Outroteste::select('res_exame', 'id_lvc')
+                                ->where('id_lvc', '!=', 1)
                                 ->where('res_exame', '=', 8)
                                 ->count();
 
-        $lvc_malarie = Outroteste::where('id_lvc', '=', 1)
+        $lvc_malarie = Outroteste::select('res_exame', 'id_lvc')
+                                ->where('id_lvc', '=', 1)
                                 ->where('res_exame', '=', 8)
                                 ->count();
 
         //2.8 Total Ovale e LVC
-        $tt_ovale = Outroteste::where('id_lvc', '!=', 1)
+        $tt_ovale = Outroteste::select('res_exame', 'id_lvc')
+                                ->where('id_lvc', '!=', 1)
                                 ->where('res_exame', '=', 10)
                                 ->count();
 
-        $lvc_ovale = Outroteste::where('id_lvc', '=', 1)
+        $lvc_ovale = Outroteste::select('res_exame', 'id_lvc')
+                                ->where('id_lvc', '=', 1)
                                 ->where('res_exame', '=', 10)
                                 ->count();
 
         //2.9 Total Não Falciparum e LVC
-        $tt_Nfalciparum = Outroteste::where('id_lvc', '!=', 1)
+        $tt_Nfalciparum = Outroteste::select('res_exame', 'id_lvc')
+                                    ->where('id_lvc', '!=', 1)
                                     ->where('res_exame', '=', 11)
                                     ->count();
 
-        $lvc_Nfalciparum = Outroteste::where('id_lvc', '=', 1)
+        $lvc_Nfalciparum = Outroteste::select('res_exame', 'id_lvc')
+                                    ->where('id_lvc', '=', 1)
                                     ->where('res_exame', '=', 11)
                                     ->count();
 
 
         //2.10 Total autóctones(positivos dentro de Manaus) e lvc
-        $tt_autoctones = Outroteste::where('id_lvc', '!=', 1)
+        $tt_autoctones = Outroteste::select('res_exame', 'id_lvc', 'mun_infec')
+                                    ->where('id_lvc', '!=', 1)
                                     ->where('res_exame', '!=', 1)
                                     ->where('mun_infec', '=', 130260)//Só de Manaus
                                     ->count();
 
-        $lvc_autoctones = Outroteste::where('id_lvc', '=', 1)
+        $lvc_autoctones = Outroteste::select('res_exame', 'id_lvc', 'mun_infec')
+                                    ->where('id_lvc', '=', 1)
                                     ->where('res_exame', '!=', 1)
                                     ->where('mun_infec', '=', 130260)
                                     ->count();
 
         //2.11 Total importados
-        $tt_importados = Outroteste::where('id_lvc', '!=', 1)
+        $tt_importados = Outroteste::select('res_exame', 'id_lvc', 'mun_infec')
+                                    ->where('id_lvc', '!=', 1)
                                     ->where('res_exame', '!=', 1)
                                     ->where('mun_infec', '!=', 130260)//Fora de Manaus
                                     ->count();
 
-        $lvc_importados = Outroteste::where('id_lvc', '=', 1)
+        $lvc_importados = Outroteste::select('res_exame', 'id_lvc', 'mun_infec')
+                                    ->where('id_lvc', '=', 1)
                                     ->where('res_exame', '!=', 1)
                                     ->where('mun_infec', '!=', 130260)
                                     ->count();
                                     
         //2.12 Total local não informado
-        $tt_nInformado = Outroteste::where('id_lvc', '!=', 1)
+        $tt_nInformado = Outroteste::select('res_exame', 'id_lvc', 'mun_infec')
+                                    ->where('id_lvc', '!=', 1)
                                     ->where('res_exame', '!=', 1)
                                     ->whereNull('mun_infec')//Município em branco null
                                     ->count();
 
         //2.13 Total de gestantes E LVC
-        $tt_gestante = Outroteste::where('id_lvc', '!=', 1)
+        $tt_gestante = Outroteste::select('res_exame', 'id_lvc', 'gestante')
+                                    ->where('id_lvc', '!=', 1)
                                     ->where('res_exame', '!=', 1)
                                     ->whereIn('gestante',[1, 2, 3, 4])
                                     ->count();
 
-        $lvc_gestante = Outroteste::where('id_lvc', '=', 1)
+        $lvc_gestante = Outroteste::select('res_exame', 'id_lvc', 'gestante')
+                                    ->where('id_lvc', '=', 1)
                                     ->where('res_exame', '!=', 1)
                                     //->where('mun_infec', '=', 130260)                                 
                                     ->whereIn('gestante',[1, 2, 3, 4])
@@ -178,20 +211,23 @@ class disaController extends Controller
 
         
         //2.14 Total idosos e LVC
-        $tt_idoso = Outroteste::where('id_lvc', '!=', 1)
+        $tt_idoso = Outroteste::select('res_exame', 'id_lvc', 'id_pacie', 'id_dimea')
+                                ->where('id_lvc', '!=', 1)
                                 ->where('res_exame', '!=', 1)
                                 ->where('id_pacie', '>=', 60)
                                 ->where('id_dimea', '=', 'A')
                                 ->count();
         
-        $lvc_idoso = Outroteste::where('id_lvc', '=', 1)
+        $lvc_idoso = Outroteste::select('res_exame', 'id_lvc', 'id_pacie', 'id_dimea')
+                                ->where('id_lvc', '=', 1)
                                 ->where('res_exame', '!=', 1)
                                 ->where('id_pacie', '>=', 60)
                                 ->where('id_dimea', '=', 'A')
                                 ->count();
 
         //2.15 Total crianças e LVC
-        $tt_crianca = Outroteste::where('id_lvc', '!=', 1)
+        $tt_crianca = Outroteste::select('res_exame', 'id_lvc', 'id_pacie', 'id_dimea')
+                                ->where('id_lvc', '!=', 1)
                                 ->where('res_exame', '!=', 1)
                                 ->where(function($query) {
                                     $query->where(function($query) {
@@ -209,7 +245,8 @@ class disaController extends Controller
                                 })
                                 ->count();
         
-        $lvc_crianca = Outroteste::where('id_lvc', '=', 1)
+        $lvc_crianca = Outroteste::select('res_exame', 'id_lvc', 'id_pacie', 'id_dimea')
+                                ->where('id_lvc', '=', 1)
                                 ->where('res_exame', '!=', 1)
                                 ->where(function($query) {
                                     $query->where(function($query) {
@@ -250,7 +287,8 @@ class disaController extends Controller
         $tt_semanas = [];
         
         foreach($semanas as $indice=>$semana){
-            $registro = Outroteste::where('semana', '=', $indice+1)//usando o indice de cada elemeto do array para comparar e filtrar a semana
+            $registro = Outroteste::select('id_lvc', 'res_exame','semana')
+                                    ->where('semana', '=', $indice+1)//usando o indice de cada elemeto do array para comparar e filtrar a semana
                                     ->where('res_exame', '!=', 1)
                                     ->where('id_lvc', '!=', 1)
                                     ->count();
@@ -380,13 +418,15 @@ class disaController extends Controller
 
         //4.2 TABELA UNIDADES NOTIFICANTES
         //Unidades notificantes
-        $unidades_notif = Unidade::all();//leftJoin('outroteste', 'unidade_notificante.cod_unid', '=', 'outroteste.unid_noti')->get();
+        $unidades_notif = Unidade::select('cod_unid', 'mun_ibge', 'nm_unid')->get();//leftJoin('outroteste', 'unidade_notificante.cod_unid', '=', 'outroteste.unid_noti')->get();
+            
 
         //Notificações
-        $notifics = Outroteste::where('res_exame', '!=', 1)
-        ->where('id_lvc', '!=', 1)
-        ->where('mun_infec', '=', 130260)
-        ->get();
+        $notifics = Outroteste::select('res_exame', 'id_lvc', 'mun_infec', 'unid_noti', 'res_exame')
+                                ->where('res_exame', '!=', 1)
+                                ->where('id_lvc', '!=', 1)
+                                ->where('mun_infec', '=', 130260)
+                                ->get();
         /*
         $notifics = DB::table('outroteste as ot')
                         ->leftjoin('localidades as local', function($join) {
