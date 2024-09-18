@@ -52,3 +52,10 @@ Route::get('/ficha-notificacao', function(){
 
     return view('ficha-notificacao', ['data'=>$data]);
 })->name('ficha-notificacao');
+
+
+
+
+//teste de otimização da página de positivos por localidade
+use App\Http\Controllers\testeController;
+Route::get('/teste', [testeController::class, 'teste']);
