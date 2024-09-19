@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Outroteste;
 use App\Models\Unidade;
 use App\Models\Distrito;
-
+use App\Models\Localidade;
 /*
 class Total{
     public $latitude;
@@ -165,8 +165,7 @@ class testeController extends Controller
         /*
             count(array_filter($array_tabela, function($array_tabela){
             return $array_tabela['id_lvc'] != 1  &&  $array_tabela['res_exame'] != 1 && $array_tabela['mun_infec'] != 130260;
-        }));*/             
-//---------------------------------------------------------------------------------------parou aqui*************                          
+        }));*/                                      
 
         $lvc_importados = Outroteste::with('res_exame', 'id_lvc', 'mun_infec')
                                     ->where('id_lvc', '=', 1)
@@ -182,19 +181,14 @@ class testeController extends Controller
                                     ->count();
 
         //2.13 Total de gestantes E LVC
-        $tt_gestante = Outroteste::with('res_exame', 'id_lvc', 'gestante')
-                                    ->where('id_lvc', '!=', 1)
-                                    ->where('res_exame', '!=', 1)
-                                    ->whereIn('gestante',[1, 2, 3, 4])
-                                    ->count();
+        $tt_gestante = count(array_filter($array_tabela, function($array_tabela){
+            return $array_tabela['id_lvc'] != 1  &&  $array_tabela['res_exame'] != 1 && in_array($array_tabela['gestante'], [1, 2, 3, 4]);
+        }));
 
-        $lvc_gestante = Outroteste::with('res_exame', 'id_lvc', 'gestante')
-                                    ->where('id_lvc', '=', 1)
-                                    ->where('res_exame', '!=', 1)
-                                    //->where('mun_infec', '=', 130260)                                 
-                                    ->whereIn('gestante',[1, 2, 3, 4])
-                                    ->count();
-
+        $lvc_gestante = count(array_filter($array_tabela, function($array_tabela){
+            return $array_tabela['id_lvc'] == 1  &&  $array_tabela['res_exame'] != 1 && in_array($array_tabela['gestante'], [1, 2, 3, 4]);
+        }));
+                        
         
         //2.14 Total idosos e LVC
         $tt_idoso = Outroteste::with('res_exame', 'id_lvc', 'id_pacie', 'id_dimea')
@@ -330,24 +324,25 @@ class testeController extends Controller
 
          
 
+        
 
 
 
 
 
-
+         
         //----------------SEÇÃO 4(TABELAS LOCAIS DE INFECÇÃO E UNIDADES NOTIFICANTES)-----------
         //4.1 TABELA LOCAIS PROVÁVEIS DE INFECÇÃO
         //4.1.1 Total positivos
-        $cods_munIBGE = DB::table('outroteste as ot')
+        $cods_munIBGE = DB::table('outroteste as ot') 
                         ->leftjoin('localidades as local', function($join) {
                             $join->on('ot.mun_infec', '=', 'local.mun_ibge')
                                 ->on('ot.loc_infec', '=', 'local.cod_local');
                         })
                         ->where('res_exame', '!=', 1)
-                        ->where('id_lvc', '!=', 1)->get();
+                        ->where('id_lvc', '!=', 1)
+                        ->get();//--------------------------------**GARGALO**----------------------------------------------------------------------------------------------------------------------------********
                         
-
         //4.1.2 criando Array códigos dos municípios e da localidade
         $qtd_positivos = [];
         foreach($cods_munIBGE as $cod_munIBGE){
@@ -425,16 +420,6 @@ class testeController extends Controller
         ->where('id_lvc', '!=', 1)
         ->where('mun_infec', '=', 130260)
         ->get();
-        /*
-        $notifics = DB::table('outroteste as ot')
-                        ->leftjoin('localidades as local', function($join) {
-                            $join->on('ot.mun_infec', '=', 'local.mun_ibge')
-                                ->on('ot.loc_infec', '=', 'local.cod_local');
-                        })
-                        ->where('res_exame', '!=', 1)
-                        ->where('id_lvc', '!=', 1)
-                        ->get();
-        */
 
         //criando array unid_noti (array dos códigos de unidades notificantes)
         $array_unidadeNoti = [];

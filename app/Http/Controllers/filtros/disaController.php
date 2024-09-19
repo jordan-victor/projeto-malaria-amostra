@@ -37,7 +37,8 @@ class disaController extends Controller
 
 
 
-
+        
+       
 
 
 
@@ -48,10 +49,15 @@ class disaController extends Controller
 
 
         //----------2. SEÇÃO (INDICADORES DE TOTAIS)---------------
-        $notificacoes = Outroteste::select('res_exame')->count();
+        $notificacoes = DB::table('positivo_localidade_rural')->select('RES_EXAME')->count();
+        //$notificacoes = Outroteste::select('res_exame')->count();
 
-        $lvc_notificacoes = Outroteste::select('id_lvc')
-                                        ->where('id_lvc', '=', 1)->count();
+        $lvc_notificacoes = DB::table('positivo_localidade_rural')
+                            ->select('LVC')
+                            ->where('LVC', '=', 1)
+                            ->count();
+        //$lvc_notificacoes = Outroteste::select('id_lvc')->where('id_lvc', '=', 1)->count();
+                                       
 
 
         //2.2 Total positivos

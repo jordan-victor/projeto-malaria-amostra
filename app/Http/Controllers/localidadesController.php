@@ -280,20 +280,23 @@ class localidadesController extends Controller
 
 
 
-
-
+        $max_locInfec = Outroteste::max('loc_infec');
+        
 
 
         //----------------SEÇÃO 4(TABELAS LOCAIS DE INFECÇÃO E UNIDADES NOTIFICANTES)-----------
         //4.1 TABELA LOCAIS PROVÁVEIS DE INFECÇÃO
         //4.1.1 Total positivos
         $cods_munIBGE = DB::table('outroteste as ot')
-                        ->leftjoin('localidades as local', function($join) {
+                        ->leftJoin('localidades as local', function($join) {
                             $join->on('ot.mun_infec', '=', 'local.mun_ibge')
                                 ->on('ot.loc_infec', '=', 'local.cod_local');
                         })
+                        //->orderBy('loc_infec', 'asc')
+                        //->limit($max_locInfec)
                         ->where('res_exame', '!=', 1)
-                        ->where('id_lvc', '!=', 1)->get();
+                        ->where('id_lvc', '!=', 1)
+                        ->get();//------------------------------------------------------**GARGALO**-----------------
                         
 
         //4.1.2 criando Array códigos dos municípios e da localidade

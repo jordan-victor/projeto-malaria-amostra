@@ -215,7 +215,7 @@
       </div>
       
       <div class="row p-3">
-        <table class="tabela">
+        <table class="tabela" id="teste">
           <thead>
             <tr>
               <th style="width:70px">Município</th>
@@ -603,7 +603,9 @@
 
 
 
-  
+  function teste(){
+    
+  }
 
   dashLocalidade()
   mapaLocalidades()
